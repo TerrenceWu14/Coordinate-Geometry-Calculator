@@ -1,8 +1,21 @@
-while True:
-    error = "Please only enter integers"
+# checks that the input is a number
 
-    try:
-        number = float(input("Number: "))
+def num_check(question):
+    while True:
 
-    except ValueError:
-        print(error)
+        # sets up error message
+        error = "Please only enter numbers"
+
+        # tries to convert number to a float
+
+        try:
+            number = float(input(question))
+            return number
+
+        # if it can't convert the input into a float it then prints the error message and sends the user back to the
+        # start of the loop
+        except ValueError:
+            print(error)
+
+
+num = num_check("num: ")
