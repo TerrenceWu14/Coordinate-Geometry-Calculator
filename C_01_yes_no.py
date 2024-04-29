@@ -5,6 +5,7 @@ def yes_no(question):
         # asks the question
         response = input(question).lower()
 
+        # checks if the user entered a yes or no
         if response == "y" or response == "yes":
             return "yes"
 
@@ -19,3 +20,5 @@ def yes_no(question):
 # Main routine goes here
 ok = yes_no("Yes or no? ")
 print(ok)
+
+
