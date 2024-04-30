@@ -18,4 +18,6 @@ def num_check(question):
             print(error)
 
 
-num = num_check("num: ")
+while True:
+    num = num_check("Number: ")
+    print(f"You chose {num}")
