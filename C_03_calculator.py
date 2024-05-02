@@ -60,11 +60,12 @@ first_y = num_check("What is your first y point?")
 second_x = num_check("What is your second x point?")
 second_y = num_check("What is your second y point?")
 
-# gets all the calculations
+# does all the calculations using the functions
 gradient = calc_gradient(first_x, first_y, second_x, second_y)
 midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
 distance = calc_distance(first_x, first_y, second_x, second_y)
-equation = f"y = {gradient}x + {((gradient * first_x) * -1) + first_y}"
+y_intercept = first_y - gradient * first_x
+equation = f"y = {gradient}x + {y_intercept}"
 
 print(f"Equation: {equation}")
 print(f"Gradient: {gradient}")
