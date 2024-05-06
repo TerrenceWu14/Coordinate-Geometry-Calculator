@@ -70,9 +70,6 @@ distance = calc_distance(first_x, first_y, second_x, second_y)
 y_intercept = first_y - gradient * first_x
 equation = f"y = {gradient:.2f}x + {y_intercept:.2f}"
 
-# asks the user what answers they'd like
-wanted_answers = input()
-
 # sets up dict
 possible_answers = {
     "equation": equation,
@@ -81,8 +78,13 @@ possible_answers = {
     "gradient": gradient,
 }
 
-# prints the answers the user would like depending on what they entered
-print(possible_answers[wanted_answers])
+# asks the user what answers they'd like
+wanted_answers = input()
 
+wanted_answers = re.search(None, wanted_answers).group()
+
+# prints the answers the user would like depending on what they entered
+for item in wanted_answers in possible_answers:
+    print(possible_answers[wanted_answers])
 
 
