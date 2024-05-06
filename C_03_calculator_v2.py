@@ -1,4 +1,5 @@
 import math
+import re
 
 
 # checks that the input is a number
@@ -55,10 +56,10 @@ def calc_distance(x1, y1, x2, y2):
 
 
 # gets the 2 x and y points
-first_x = num_check("What is your first x point?")
-first_y = num_check("What is your first y point?")
-second_x = num_check("What is your second x point?")
-second_y = num_check("What is your second y point?")
+first_x = 2.5
+first_y = 7
+second_x = 7.5
+second_y = 21
 
 # does all the calculations using the functions
 gradient = calc_gradient(first_x, first_y, second_x, second_y)
@@ -69,13 +70,19 @@ distance = calc_distance(first_x, first_y, second_x, second_y)
 y_intercept = first_y - gradient * first_x
 equation = f"y = {gradient:.2f}x + {y_intercept:.2f}"
 
+# asks the user what answers they'd like
 wanted_answers = input()
 
-if "equations" in wanted_answers:
-    print(f"Equation: {equation}")
-elif "gradients" in wanted_answers:
-    print(f"Gradient: {gradient:.2f}")
-elif "midpoint" in wanted_answers:
-    print(f"Midpoint: {midpoint}")
-elif "distance" in wanted_answers:
-    print(f"Distance: {distance:.2f}")
+# sets up dict
+possible_answers = {
+    "equation": equation,
+    "midpoint": midpoint,
+    "distance": distance,
+    "gradient": gradient,
+}
+
+# prints the answers the user would like depending on what they entered
+print(possible_answers[wanted_answers])
+
+
+
