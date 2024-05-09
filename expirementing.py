@@ -1,5 +1,4 @@
 import math
-import re
 
 
 # checks that the input is a number
@@ -42,7 +41,7 @@ def calc_midpoint(x1, y1, x2, y2):
 
     # puts the x and y middle points into one message
     # so that it displays as a coordinate
-    midpoint = f"{x_mid:.2f}, {y_mid:.2f}"
+    midpoint = f"Midpoint: ({x_mid:.2f}, {y_mid:.2f})"
 
     return midpoint
 
@@ -68,7 +67,12 @@ distance = calc_distance(first_x, first_y, second_x, second_y)
 
 # finds the equation for between the two points
 y_intercept = first_y - gradient * first_x
-equation = f"y = {gradient:.2f}x + {y_intercept:.2f}"
+
+# formats the answers properly for printing
+equation = f"Equation: y = {gradient:.2f}x + {y_intercept:.2f}"
+gradient = f"Gradient: {gradient:.2f}x "
+distance = f"Distance: {distance:.2f} "
+
 
 # sets up dict
 possible_answers = {
@@ -82,10 +86,12 @@ keep_going = ""
 
 while keep_going == "":
     # asks the user what answers they'd like
-    wanted_answers = input("What answers would you like? ").lower()
+    wanted_answers = input("What answers would you like (<enter> to stop)?").lower()
+
+    if wanted_answers == "":
+        break
 
     # converts the user input into a list of items they want
-    wanted_answers = re.split(r',|\s+|\band*?\b', wanted_answers.strip())
     print(wanted_answers)
 
     # prints the answers the user wants
@@ -93,10 +99,10 @@ while keep_going == "":
 
         # Check if the item is in the possible_answers dictionary
         if item in possible_answers:
-            print(f"{item}: {possible_answers[item]}")
-
-            keep_going = input("Do you need any other answers (<enter> for yes)? ")
+            print(f"{possible_answers[item]}")
+            print()
 
         else:
             print(f"Please enter in equation, midpoint, distance or gradient only "
                   f"(or check your spelling).")
+
