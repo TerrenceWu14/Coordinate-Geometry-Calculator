@@ -54,6 +54,27 @@ def calc_distance(x1, y1, x2, y2):
     return distance
 
 
+# checks that users enter a valid response
+def print_answer(question, allowed_responses, answers, exit_code=None):
+
+    while True:
+
+        response = input(question).lower()
+
+        if response == exit_code:
+            break
+
+        elif response in allowed_responses:
+
+            # should print all the answers that the user wanted in
+            # the input response
+            for response in answers:
+                print(answers[response])
+
+        else:
+            print(f"Please enter a response in {allowed_responses}")
+
+
 # gets the 2 x and y points
 first_x = 19
 first_y = 5
@@ -70,9 +91,11 @@ y_intercept = first_y - gradient * first_x
 
 # formats the answers properly for printing
 equation = f"Equation: y = {gradient:.2f}x + {y_intercept:.2f}"
-gradient = f"Gradient: {gradient:.2f}x "
+gradient = f"Gradient: {gradient:.2f} "
 distance = f"Distance: {distance:.2f} "
 
+# sets up a list of valid answers
+valid_responses = ["gradient", "midpoint", "distance", "equation"]
 
 # sets up dict
 possible_answers = {
@@ -82,27 +105,4 @@ possible_answers = {
     "gradient": gradient,
 }
 
-keep_going = ""
-
-while keep_going == "":
-    # asks the user what answers they'd like
-    wanted_answers = input("What answers would you like (<enter> to stop)?").lower()
-
-    if wanted_answers == "":
-        break
-
-    # converts the user input into a list of items they want
-    print(wanted_answers)
-
-    # prints the answers the user wants
-    for item in wanted_answers:
-
-        # Check if the item is in the possible_answers dictionary
-        if item in possible_answers:
-            print(f"{possible_answers[item]}")
-            print()
-
-        else:
-            print(f"Please enter in equation, midpoint, distance or gradient only "
-                  f"(or check your spelling).")
-
+print_answer("What answers would you like (<enter> to stop)?", valid_responses, possible_answers, exit_code="")
