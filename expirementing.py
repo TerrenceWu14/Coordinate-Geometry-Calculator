@@ -65,11 +65,7 @@ def print_answer(question, allowed_responses, answers, exit_code=None):
             break
 
         elif response in allowed_responses:
-
-            # should print all the answers that the user wanted in
-            # the input response
-            for response in answers:
-                print(answers[response])
+            print(answers[response])
 
         else:
             print(f"Please enter a response in {allowed_responses}")
@@ -98,11 +94,11 @@ distance = f"Distance: {distance:.2f} "
 valid_responses = ["gradient", "midpoint", "distance", "equation"]
 
 # sets up dict
-possible_answers = {
+answers = {
     "equation": equation,
     "midpoint": midpoint,
     "distance": distance,
     "gradient": gradient,
 }
 
-print_answer("What answers would you like (<enter> to stop)?", valid_responses, possible_answers, exit_code="")
+print_answer("What answers would you like (<enter> to stop)?", valid_responses, answers, exit_code="")
