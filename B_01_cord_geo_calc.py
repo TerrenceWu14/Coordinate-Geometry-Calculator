@@ -56,7 +56,6 @@ def calc_distance(x1, y1, x2, y2):
 
 # checks that users enter a valid response
 def print_answer(question, allowed_responses, answers, exit_code=None):
-
     while True:
 
         response = input(question).lower()
@@ -65,25 +64,24 @@ def print_answer(question, allowed_responses, answers, exit_code=None):
         if response == exit_code:
             break
 
+        # prints everything if the user chose to do so
+        elif response == "all":
+            for response in answers:
+                print(answers[response])
+
         # prints the answer the user wanted
         elif response in allowed_responses:
             print(answers[response])
-
-        # prints everything if the user chose to do so
-        elif response == "all":
-
-            for response in answers:
-                print(answers[response])
 
         else:
             print(f"Please enter a response in {allowed_responses}")
 
 
 # gets the 2 x and y points
-first_x = num_check("What is your first x point?")
-first_y = num_check("What is your first y point?")
-second_x = num_check("What is your second x point?")
-second_y = num_check("What is your second y point?")
+first_x = 19
+first_y = 5
+second_x = 25
+second_y = 21
 
 # does all the calculations using the functions
 gradient = calc_gradient(first_x, first_y, second_x, second_y)
