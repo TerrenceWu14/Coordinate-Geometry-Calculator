@@ -68,7 +68,8 @@ def print_answer(question, allowed_responses, answers, exit_code=None):
         elif response == "all":
             for response in answers:
                 print(answers[response])
-                return response
+
+            return response
 
         # prints the answer the user wanted
         elif response in allowed_responses:
@@ -116,7 +117,7 @@ answers = {
 # asks the user what answers they'd like and prints them
 wanted_answers = print_answer("What answers would you like (<enter> to stop)?", valid_responses, answers, exit_code="")
 
-to_write.append(wanted_answers)
+to_write.append(answers[wanted_answers])
 
 # fixed answers
 equation = "Equation: y = 5x + 2"
@@ -131,7 +132,7 @@ text_file = open(file_name, "w+")
 
 # heading
 text_file.write(f"***** {file_name}"
-                f"***** \n \n")
+                f" ***** \n \n")
 
 # heading
 for item in to_write:
