@@ -68,8 +68,7 @@ def print_answer(question, allowed_responses, answers, exit_code=None):
         elif response == "all":
             for response in answers:
                 print(answers[response])
-
-            return response
+                pass
 
         # prints the answer the user wanted
         elif response in allowed_responses:
