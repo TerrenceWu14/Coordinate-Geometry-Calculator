@@ -66,9 +66,9 @@ def print_answer(question, allowed_responses, answers, exit_code=None):
 
         # prints everything if the user chose to do so
         elif response == "all":
-            for response in answers:
-                print(answers[response])
-                pass
+            print(answers[response])
+
+            return answers[response]
 
         # prints the answer the user wanted
         elif response in allowed_responses:
@@ -111,12 +111,13 @@ answers = {
     "midpoint": midpoint,
     "distance": distance,
     "gradient": gradient,
+    "all": f"{equation}\n{midpoint}\n{distance}\n{gradient}\n"
 }
 
 # asks the user what answers they'd like and prints them
 wanted_answers = print_answer("What answers would you like (<enter> to stop)?", valid_responses, answers, exit_code="")
 
-to_write.append(answers[wanted_answers])
+to_write.append(wanted_answers)
 
 # fixed answers
 equation = "Equation: y = 5x + 2"
