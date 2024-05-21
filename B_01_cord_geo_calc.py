@@ -66,22 +66,29 @@ def print_answer(question, allowed_responses, answers, exit_code=None):
 
         # prints everything if the user chose to do so
         elif response == "all":
-            for response in answers:
-                print(answers[response])
+            print(answers[response])
+
+            # returns in the same format in order to be written to txt file
+            return answers[response]
 
         # prints the answer the user wanted
         elif response in allowed_responses:
             print(answers[response])
 
+            return answers[response]
+
         else:
             print(f"Please enter a response in {allowed_responses}")
 
 
+# sets up to_write list
+to_write = []
+
 # gets the 2 x and y points
-first_x = 19
-first_y = 5
-second_x = 25
-second_y = 21
+first_x = num_check("What is your first x point?")
+first_y = num_check("What is your first y point?")
+second_x = num_check("What is your second x point?")
+second_y = num_check("What is your second y point?")
 
 # does all the calculations using the functions
 gradient = calc_gradient(first_x, first_y, second_x, second_y)
@@ -95,6 +102,7 @@ y_intercept = first_y - gradient * first_x
 equation = f"Equation: y = {gradient:.2f}x + {y_intercept:.2f}"
 gradient = f"Gradient: {gradient:.2f} "
 distance = f"Distance: {distance:.2f} "
+all_answers = f"{equation}\n{midpoint}\n{distance}\n{gradient}\n"
 
 # sets up a list of valid answers
 valid_responses = ["gradient", "midpoint", "distance", "equation", "all"]
@@ -105,7 +113,29 @@ answers = {
     "midpoint": midpoint,
     "distance": distance,
     "gradient": gradient,
+    "all": all_answers,
 }
 
 # asks the user what answers they'd like and prints them
-print_answer("What answers would you like (<enter> to stop)?", valid_responses, answers, exit_code="")
+wanted_answers = print_answer("What answers would you like (<enter> to stop)?", valid_responses, answers, exit_code="")
+
+# appends the wanted answers into a list to be written
+# onto a txt file
+to_write.append(wanted_answers)
+
+# write to file
+# create file to hold data(add .txt extension)
+file_name = "Coordinate Geometry Calculator Answers.txt"
+text_file = open(file_name, "w+")
+
+# heading
+text_file.write(f"***** {file_name}"
+                f" ***** \n \n")
+
+# heading
+for item in to_write:
+    text_file.write(item)
+    text_file.write("\n")
+
+# closes file
+text_file.close()
