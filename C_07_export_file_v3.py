@@ -68,13 +68,14 @@ def print_answer(question, allowed_responses, answers, exit_code=None):
         elif response == "all":
             print(answers[response])
 
+            # returns in the same format in order to be written to txt file
             return answers[response]
 
         # prints the answer the user wanted
         elif response in allowed_responses:
             print(answers[response])
 
-            return response
+            return answers[response]
 
         else:
             print(f"Please enter a response in {allowed_responses}")
@@ -101,6 +102,7 @@ y_intercept = first_y - gradient * first_x
 equation = f"Equation: y = {gradient:.2f}x + {y_intercept:.2f}"
 gradient = f"Gradient: {gradient:.2f} "
 distance = f"Distance: {distance:.2f} "
+all_answers = f"{equation}\n{midpoint}\n{distance}\n{gradient}\n"
 
 # sets up a list of valid answers
 valid_responses = ["gradient", "midpoint", "distance", "equation", "all"]
@@ -111,19 +113,15 @@ answers = {
     "midpoint": midpoint,
     "distance": distance,
     "gradient": gradient,
-    "all": f"{equation}\n{midpoint}\n{distance}\n{gradient}\n"
+    "all": all_answers,
 }
 
 # asks the user what answers they'd like and prints them
 wanted_answers = print_answer("What answers would you like (<enter> to stop)?", valid_responses, answers, exit_code="")
 
+# appends the wanted answers into a list to be written
+# onto a txt file
 to_write.append(wanted_answers)
-
-# fixed answers
-equation = "Equation: y = 5x + 2"
-midpoint = "Midpoint: (22.3, 5)"
-gradient = "Gradient: 5 "
-distance = "Distance: 3.4"
 
 # write to file
 # create file to hold data(add .txt extension)
