@@ -104,6 +104,8 @@ except ZeroDivisionError:
         second_x = num_check("What is your second x point?")
         second_y = num_check("What is your second y point?")
 
+
+gradient = calc_gradient(first_x, first_y, second_x, second_y)
 midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
 distance = calc_distance(first_x, first_y, second_x, second_y)
 
