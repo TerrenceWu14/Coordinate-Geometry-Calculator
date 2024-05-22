@@ -55,17 +55,13 @@ def calc_distance(x1, y1, x2, y2):
 
 
 # checks that users enter a valid response
-def print_answer(question, allowed_responses, answers, exit_code=None):
+def print_answer(question, allowed_responses, answers):
     while True:
 
         response = input(question).lower()
 
-        # exits the loop
-        if response == exit_code:
-            break
-
         # prints everything if the user chose to do so
-        elif response == "all":
+        if response == "all":
             print(answers[response])
 
             # returns in the same format in order to be written to txt file
@@ -91,7 +87,23 @@ second_x = num_check("What is your second x point?")
 second_y = num_check("What is your second y point?")
 
 # does all the calculations using the functions
-gradient = calc_gradient(first_x, first_y, second_x, second_y)
+try:
+    gradient = calc_gradient(first_x, first_y, second_x, second_y)
+
+except ZeroDivisionError:
+
+    print()
+    re_enter = input("Check if it's a horizontal or vertical line.\nThis is because "
+                     "the gradient is 0 or indefinite from our calculations.\n"
+                     "Otherwise, press <enter to re-enter your x and y points.")
+
+    if re_enter == "":
+        # gets the 2 x and y points
+        first_x = num_check("What is your first x point?")
+        first_y = num_check("What is your first y point?")
+        second_x = num_check("What is your second x point?")
+        second_y = num_check("What is your second y point?")
+
 midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
 distance = calc_distance(first_x, first_y, second_x, second_y)
 
@@ -117,7 +129,7 @@ answers = {
 }
 
 # asks the user what answers they'd like and prints them
-wanted_answers = print_answer("What answers would you like (<enter> to stop)?", valid_responses, answers, exit_code="")
+wanted_answers = print_answer("What answers would you like?", valid_responses, answers)
 
 # appends the wanted answers into a list to be written
 # onto a txt file
