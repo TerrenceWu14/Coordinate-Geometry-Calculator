@@ -80,29 +80,27 @@ def print_answer(question, allowed_responses, answers):
 # sets up to_write list
 to_write = []
 
-# gets the 2 x and y points
-first_x = num_check("What is your first x point?")
-first_y = num_check("What is your first y point?")
-second_x = num_check("What is your second x point?")
-second_y = num_check("What is your second y point?")
+while True:
+    # gets the 2 x and y points
+    first_x = num_check("What is your first x point?")
+    first_y = num_check("What is your first y point?")
+    second_x = num_check("What is your second x point?")
+    second_y = num_check("What is your second y point?")
 
-# does all the calculations using the functions
-try:
-    gradient = calc_gradient(first_x, first_y, second_x, second_y)
+    # does all the calculations using the functions
+    try:
+        gradient = calc_gradient(first_x, first_y, second_x, second_y)
+        break
 
-except ZeroDivisionError:
+    except ZeroDivisionError:
 
-    print()
-    re_enter = input("Check if it's a horizontal or vertical line.\nThis is because "
-                     "the gradient is 0 or indefinite from our calculations.\n"
-                     "Otherwise, press <enter to re-enter your x and y points.")
+        print()
+        re_enter = input("Check if it's a horizontal or vertical line.\nThis is because "
+                         "the gradient is 0 or indefinite from our calculations.\n"
+                         "Otherwise, press <enter to re-enter your x and y points.")
 
-    if re_enter == "":
-        # gets the 2 x and y points
-        first_x = num_check("What is your first x point?")
-        first_y = num_check("What is your first y point?")
-        second_x = num_check("What is your second x point?")
-        second_y = num_check("What is your second y point?")
+        if re_enter == "":
+            continue
 
 
 gradient = calc_gradient(first_x, first_y, second_x, second_y)
