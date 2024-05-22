@@ -27,15 +27,17 @@ def calc_gradient(x1, y1, x2, y2):
     diff_in_y = y2 - y1
     diff_in_x = x2 - x1
 
+    # tries to divide the two variables
     try:
-
         # finds the actual gradient
         gradient = diff_in_y / diff_in_x
 
         return gradient
 
+    # prints error message if it is not able to be divided
     except ZeroDivisionError:
         print()
+
         print("Check if it's a horizontal or vertical line.\nThis is because "
               "the gradient is 0 or indefinite from our calculations.\n"
               "Otherwise please re-enter your x and y points.")
@@ -73,17 +75,17 @@ def print_answer(question, allowed_responses, answers):
         response = input(question).lower()
 
         # prints everything if the user chose to do so
-        if response == "all":
-            print(answers[response])
+        if response[:1] == "a":
+            print(answers[response[:1]])
 
             # returns in the same format in order to be written to txt file
-            return answers[response]
+            return answers[response[:1]]
 
         # prints the answer the user wanted
-        elif response in allowed_responses:
-            print(answers[response])
+        elif response[:1] in allowed_responses:
+            print(answers[response[:1]])
 
-            return answers[response]
+            return answers[response[:1]]
 
         else:
             print(f"Please enter a response in {allowed_responses}")
@@ -105,6 +107,8 @@ while True:
     midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
     distance = calc_distance(first_x, first_y, second_x, second_y)
 
+    # if there is an error with the calculation fo the gradient
+    # sends the user back to the start of the loop to re-enter their points
     if gradient == "yes":
         continue
 
@@ -122,18 +126,19 @@ distance = f"Distance: {distance:.2f} "
 all_answers = f"{equation}\n{midpoint}\n{distance}\n{gradient}\n"
 
 # sets up a list of valid answers
-valid_responses = ["gradient", "midpoint", "distance", "equation", "all"]
+valid_responses = ["gradient", "midpoint", "distance", "equation", "all", "g", "m", "d", "e"]
 
 # sets up dict
 answers = {
-    "equation": equation,
-    "midpoint": midpoint,
-    "distance": distance,
-    "gradient": gradient,
-    "all": all_answers,
+    "e": equation,
+    "m": midpoint,
+    "d": distance,
+    "g": gradient,
+    "a": all_answers,
 }
 
 # asks the user what answers they'd like and prints them
+print()
 wanted_answers = print_answer("What answers would you like?", valid_responses, answers)
 
 # appends the wanted answers into a list to be written
