@@ -27,10 +27,24 @@ def calc_gradient(x1, y1, x2, y2):
     diff_in_y = y2 - y1
     diff_in_x = x2 - x1
 
-    # finds the actual gradient
-    gradient = diff_in_y / diff_in_x
+    # tries to divide the two variables
+    try:
+        # finds the actual gradient
+        gradient = diff_in_y / diff_in_x
 
-    return gradient
+        return gradient
+
+    # prints error message if it is not able to be divided
+    except ZeroDivisionError:
+        print()
+
+        print("Check if it's a horizontal or vertical line.\nThis is because "
+              "the gradient is 0 or indefinite from our calculations.\n"
+              "Otherwise please re-enter your x and y points.")
+
+        re_enter = "yes"
+
+        return re_enter
 
 
 # calculates the midpoint of the 2 points
@@ -55,32 +69,52 @@ def calc_distance(x1, y1, x2, y2):
 
 
 # checks that users enter a valid response
-def print_answer(question, allowed_responses, answers, exit_code=None):
-
+def print_answer(question, allowed_responses, answers):
     while True:
 
         response = input(question).lower()
 
-        if response == exit_code:
-            break
+        # prints everything if the user chose to do so
+        if response[:1] == "a":
+            print(answers[response[:1]])
 
-        elif response in allowed_responses:
-            print(answers[response])
+            # returns in the same format in order to be written to txt file
+            return answers[response[:1]]
+
+        # prints the answer the user wanted
+        elif response[:1] in allowed_responses:
+            print(answers[response[:1]])
+
+            return answers[response[:1]]
 
         else:
             print(f"Please enter a response in {allowed_responses}")
 
 
-# gets the 2 x and y points
-first_x = 19
-first_y = 5
-second_x = 25
-second_y = 21
+# sets up to_write list
+to_write = []
 
-# does all the calculations using the functions
-gradient = calc_gradient(first_x, first_y, second_x, second_y)
-midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
-distance = calc_distance(first_x, first_y, second_x, second_y)
+while True:
+
+    # gets the 2 x and y points
+    first_x = 13.6
+    first_y = 14.3
+    second_x = 20
+    second_y = 15
+
+    # calculates the gradient, midpoint and distance
+    gradient = calc_gradient(first_x, first_y, second_x, second_y)
+    midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
+    distance = calc_distance(first_x, first_y, second_x, second_y)
+
+    # if there is an error with the calculation fo the gradient
+    # sends the user back to the start of the loop to re-enter their points
+    if gradient == "yes":
+        continue
+
+    else:
+        break
+
 
 # finds the equation for between the two points
 y_intercept = first_y - gradient * first_x
@@ -89,16 +123,41 @@ y_intercept = first_y - gradient * first_x
 equation = f"Equation: y = {gradient:.2f}x + {y_intercept:.2f}"
 gradient = f"Gradient: {gradient:.2f} "
 distance = f"Distance: {distance:.2f} "
+all_answers = f"{equation}\n{midpoint}\n{distance}\n{gradient}\n"
 
 # sets up a list of valid answers
-valid_responses = ["gradient", "midpoint", "distance", "equation"]
+valid_responses = ["gradient", "midpoint", "distance", "equation", "all", "g", "m", "d", "e"]
 
 # sets up dict
 answers = {
-    "equation": equation,
-    "midpoint": midpoint,
-    "distance": distance,
-    "gradient": gradient,
+    "e": equation,
+    "m": midpoint,
+    "d": distance,
+    "g": gradient,
+    "a": all_answers,
 }
 
-print_answer("What answers would you like (<enter> to stop)?", valid_responses, answers, exit_code="")
+# asks the user what answers they'd like and prints them
+print()
+wanted_answers = print_answer("What answers would you like?", valid_responses, answers)
+
+# appends the wanted answers into a list to be written
+# onto a txt file
+to_write.append(wanted_answers)
+
+# write to file
+# create file to hold data(add .txt extension)
+file_name = "Coordinate Geometry Calculator Answers.txt"
+text_file = open(file_name, "w+")
+
+# heading
+text_file.write(f"***** {file_name}"
+                f" ***** \n \n")
+
+# heading
+for item in to_write:
+    text_file.write(item)
+    text_file.write("\n")
+
+# closes file
+text_file.close()
