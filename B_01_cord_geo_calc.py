@@ -27,10 +27,22 @@ def calc_gradient(x1, y1, x2, y2):
     diff_in_y = y2 - y1
     diff_in_x = x2 - x1
 
-    # finds the actual gradient
-    gradient = diff_in_y / diff_in_x
+    try:
 
-    return gradient
+        # finds the actual gradient
+        gradient = diff_in_y / diff_in_x
+
+        return gradient
+
+    except ZeroDivisionError:
+        print()
+        print("Check if it's a horizontal or vertical line.\nThis is because "
+              "the gradient is 0 or indefinite from our calculations.\n"
+              "Otherwise please re-enter your x and y points.")
+
+        re_enter = "yes"
+
+        return re_enter
 
 
 # calculates the midpoint of the 2 points
@@ -81,31 +93,24 @@ def print_answer(question, allowed_responses, answers):
 to_write = []
 
 while True:
+
     # gets the 2 x and y points
     first_x = num_check("What is your first x point?")
     first_y = num_check("What is your first y point?")
     second_x = num_check("What is your second x point?")
     second_y = num_check("What is your second y point?")
 
-    # does all the calculations using the functions
-    try:
-        gradient = calc_gradient(first_x, first_y, second_x, second_y)
+    # calculates the gradient, midpoint and distance
+    gradient = calc_gradient(first_x, first_y, second_x, second_y)
+    midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
+    distance = calc_distance(first_x, first_y, second_x, second_y)
+
+    if gradient == "yes":
+        continue
+
+    else:
         break
 
-    except ZeroDivisionError:
-
-        print()
-        re_enter = input("Check if it's a horizontal or vertical line.\nThis is because "
-                         "the gradient is 0 or indefinite from our calculations.\n"
-                         "Otherwise, press <enter to re-enter your x and y points.")
-
-        if re_enter == "":
-            continue
-
-
-gradient = calc_gradient(first_x, first_y, second_x, second_y)
-midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
-distance = calc_distance(first_x, first_y, second_x, second_y)
 
 # finds the equation for between the two points
 y_intercept = first_y - gradient * first_x
