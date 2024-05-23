@@ -5,12 +5,16 @@ def yes_no(question):
         # asks the question
         response = input(question).lower()
 
-        # checks if the user entered a yes or no
-        if response == "y" or response == "yes":
-            return "yes"
+        # sets up yes or no dict
+        yes_or_no = {
+            "y": "yes",
+            "n": "no",
+        }
 
-        elif response == "n" or response == "no":
-            return "no"
+        # checks if the first letter of the response
+        # fits the keys in the dict
+        if response[:1] in yes_or_no:
+            return yes_or_no[response]
 
         # prints the error message
         else:
@@ -20,5 +24,3 @@ def yes_no(question):
 # Main routine goes here
 ok = yes_no("Yes or no? ")
 print(ok)
-
-
