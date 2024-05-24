@@ -17,7 +17,7 @@ def yes_no(question):
         # checks if the first letter of the response
         # fits the keys in the dict
         if response[:1] in yes_or_no:
-            return yes_or_no[response]
+            return yes_or_no[response[:1]]
 
         # prints the error message
         else:
@@ -83,10 +83,10 @@ def calc_gradient(x1, y1, x2, y2):
     # prints error message if it is not able to be divided
     except ZeroDivisionError:
         print()
-
         print("Check if it's a horizontal or vertical line.\nThis is because "
               "the gradient is 0 or indefinite from our calculations.\n"
               "Otherwise please re-enter your x and y points.")
+        print()
 
         re_enter = "yes"
 
