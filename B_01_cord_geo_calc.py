@@ -31,7 +31,7 @@ def instructions():
 ***** Instructions *****
 
 To begin, you enter your first x and y coordinates along with
-the second one. Then Enter what answer's you'd like to see, for
+the second one. Then enter what answer's you'd like to see, for
 example: "equation" and it will give you the equation according 
 to the two x and y points you entered. 
 
@@ -178,7 +178,7 @@ distance = f"Distance: {distance:.2f} "
 all_answers = f"{equation}\n{midpoint}\n{distance}\n{gradient}\n"
 
 # sets up a list of valid answers
-valid_responses = ["gradient", "midpoint", "distance", "equation", "all", "g", "m", "d", "e"]
+valid_responses = ["gradient", "midpoint", "distance", "equation", "a", "all", "g", "m", "d", "e"]
 
 # sets up dict
 answers = {
