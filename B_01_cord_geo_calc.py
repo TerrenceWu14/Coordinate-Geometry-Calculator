@@ -122,6 +122,7 @@ def print_answer(question, allowed_responses, answers):
 
         # prints everything if the user chose to do so
         if response[:1] == "a":
+            print()
             print(answers[response[:1]])
 
             # returns in the same format in order to be written to txt file
@@ -129,6 +130,7 @@ def print_answer(question, allowed_responses, answers):
 
         # prints the answer the user wanted
         elif response[:1] in allowed_responses:
+            print()
             print(answers[response[:1]])
 
             return answers[response[:1]]
