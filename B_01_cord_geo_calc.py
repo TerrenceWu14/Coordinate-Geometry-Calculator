@@ -120,7 +120,8 @@ def print_answer(question, allowed_responses, answers):
 
         response = input(question).lower()
 
-        # prints everything if the user chose to do so
+        # prints everything if the user chose to do so according to the first
+        # letter of the response
         if response[:1] == "a":
             print()
             print(answers[response[:1]])
@@ -128,7 +129,8 @@ def print_answer(question, allowed_responses, answers):
             # returns in the same format in order to be written to txt file
             return answers[response[:1]]
 
-        # prints the answer the user wanted
+        # prints the answer the user wanted according
+        # to the same format as the previous if statement
         elif response[:1] in allowed_responses:
             print()
             print(answers[response[:1]])
@@ -206,7 +208,7 @@ text_file = open(file_name, "w+")
 text_file.write(f"***** {file_name}"
                 f" ***** \n \n")
 
-# heading
+# writes all the items into the text file
 for item in to_write:
     text_file.write(item)
     text_file.write("\n")
