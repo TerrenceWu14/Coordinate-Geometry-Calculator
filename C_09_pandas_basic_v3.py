@@ -68,28 +68,28 @@ for item in range(0, 2):
     second_x = num_check("What is your second x point?")
     second_y = num_check("What is your second y point?")
 
+    # appends the coordinates for this question
     coordinates.append(f"({first_x}, {first_y}), ({second_x}, {second_y})")
 
-    # does all the calculations using the functions
+    # calculates the gradient
     gradient = calc_gradient(first_x, first_y, second_x, second_y)
-    midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
-    distance = calc_distance(first_x, first_y, second_x, second_y)
 
     # finds the equation for between the two points
     y_intercept = first_y - gradient * first_x
 
+    # appends and calculates (for some) the answers for the current coordinates
     equation.append(f"y = {gradient:.2f}x + {y_intercept:.2f}")
-    midpoint.append(midpoint)
-    distance.append(distance)
+    midpoint.append(calc_midpoint(first_x, first_y, second_x, second_y))
+    distance.append(calc_distance(first_x, first_y, second_x, second_y))
     gradient.append(gradient)
 
 # sets up dict
 answers = {
     "Coordinate": coordinates,
-    "Equation": [equation],
-    "Midpoint": [midpoint],
-    "Distance": [distance],
-    "Gradient": [gradient],
+    "Equation": equation,
+    "Midpoint": midpoint,
+    "Distance": distance,
+    "Gradient": gradient,
 }
 
 # sets up a list of valid answers
