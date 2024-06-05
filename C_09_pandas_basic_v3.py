@@ -55,11 +55,11 @@ def calc_distance(x1, y1, x2, y2):
     return round(distance, 2)
 
 
-coordinates = []
-equation = []
-midpoint = []
-distance = []
-gradient = []
+coordinates_list = []
+equations_list = []
+midpoints_list = []
+distances_list = []
+gradients_list = []
 
 for item in range(0, 2):
     # gets the 2 x and y points
@@ -69,7 +69,7 @@ for item in range(0, 2):
     second_y = num_check("What is your second y point?")
 
     # appends the coordinates for this question
-    coordinates.append(f"({first_x}, {first_y}), ({second_x}, {second_y})")
+    coordinates_list.append(f"({first_x}, {first_y}), ({second_x}, {second_y})")
 
     # calculates the gradient
     gradient = calc_gradient(first_x, first_y, second_x, second_y)
@@ -78,18 +78,18 @@ for item in range(0, 2):
     y_intercept = first_y - gradient * first_x
 
     # appends and calculates (for some) the answers for the current coordinates
-    equation.append(f"y = {gradient:.2f}x + {y_intercept:.2f}")
-    midpoint.append(calc_midpoint(first_x, first_y, second_x, second_y))
-    distance.append(calc_distance(first_x, first_y, second_x, second_y))
+    equations_list.append(f"y = {gradient:.2f}x + {y_intercept:.2f}")
+    midpoints_list.append(calc_midpoint(first_x, first_y, second_x, second_y))
+    distances_list.append(calc_distance(first_x, first_y, second_x, second_y))
     gradient.append(gradient)
 
 # sets up dict
 answers = {
-    "Coordinate": coordinates,
-    "Equation": equation,
-    "Midpoint": midpoint,
-    "Distance": distance,
-    "Gradient": gradient,
+    "Coordinate": coordinates_list,
+    "Equation": equations_list,
+    "Midpoint": midpoints_list,
+    "Distance": distances_list,
+    "Gradient": gradients_list,
 }
 
 # sets up a list of valid answers
