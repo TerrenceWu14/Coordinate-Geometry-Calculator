@@ -28,10 +28,24 @@ def calc_gradient(x1, y1, x2, y2):
     diff_in_y = y2 - y1
     diff_in_x = x2 - x1
 
-    # finds the actual gradient
-    gradient = diff_in_y / diff_in_x
+    # tries to divide the two variables
+    try:
+        # finds the actual gradient
+        gradient = diff_in_y / diff_in_x
 
-    return gradient
+        return gradient
+
+    # prints error message if it is not able to be divided
+    except ZeroDivisionError:
+        print()
+        print("Check if it's a horizontal or vertical line.\nThis is because "
+              "the gradient is 0 or indefinite from our calculations.\n"
+              "Otherwise please re-enter your x and y points.")
+        print()
+
+        re_enter = "yes"
+
+        return re_enter
 
 
 # calculates the midpoint of the 2 points
@@ -47,7 +61,7 @@ def calc_midpoint(x1, y1, x2, y2):
     return midpoint
 
 
-# calculates the distance of the 2 points
+# calculates the distance of the 02 points
 def calc_distance(x1, y1, x2, y2):
     # calculates the distance between the two points
     distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
@@ -55,6 +69,7 @@ def calc_distance(x1, y1, x2, y2):
     return round(distance, 2)
 
 
+# sets up the lists for panda dataframes
 coordinates_list = []
 equations_list = []
 midpoints_list = []
