@@ -96,7 +96,7 @@ for item in range(0, 2):
     equations_list.append(f"y = {gradient:.2f}x + {y_intercept:.2f}")
     midpoints_list.append(calc_midpoint(first_x, first_y, second_x, second_y))
     distances_list.append(calc_distance(first_x, first_y, second_x, second_y))
-    gradient.append(gradient)
+    gradients_list.append(gradient)
 
 # sets up dict
 answers = {
