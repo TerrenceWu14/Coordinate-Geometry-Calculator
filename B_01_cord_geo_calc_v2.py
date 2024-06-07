@@ -221,23 +221,25 @@ print(pandas_frame)
 # print()
 # wanted_answers = print_answer("What answers would you like?", valid_responses, answers)
 
-# appends the wanted answers into a list to be written
+# change frame to a string so that we can export it to file
+pandas_frame = pandas.DataFrame.to_string(pandas_frame)
+
 # onto a txt file
-# to_write.append(wanted_answers)
-#
-# # write to file
-# # create file to hold data(add .txt extension)
-# file_name = "Coordinate Geometry Calculator Answers.txt"
-# text_file = open(file_name, "w+")
-#
-# # heading
-# text_file.write(f"***** {file_name}"
-#                 f" ***** \n \n")
-#
-# # writes all the items into the text file
-# for item in to_write:
-#     text_file.write(item)
-#     text_file.write("\n")
-#
-# # closes file
-# text_file.close()
+to_write.append(pandas_frame)
+
+# write to file
+# create file to hold data(add .txt extension)
+file_name = "Coordinate Geometry Calculator Answers.txt"
+text_file = open(file_name, "w+")
+
+# heading
+text_file.write(f"***** {file_name}"
+                f" ***** \n \n")
+
+# writes all the items into the text file
+for item in to_write:
+    text_file.write(item)
+    text_file.write("\n")
+
+# closes file
+text_file.close()
