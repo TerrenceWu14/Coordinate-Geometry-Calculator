@@ -70,13 +70,15 @@ def calc_distance(x1, y1, x2, y2):
 
 
 # sets up the lists for panda dataframes
-coordinates_list = []
+questions_list = []
 equations_list = []
 midpoints_list = []
 distances_list = []
 gradients_list = []
+question_num = 0
 
 for item in range(0, 2):
+    question_num += 1
     # gets the 2 x and y points
     first_x = num_check("What is your first x point?")
     first_y = num_check("What is your first y point?")
@@ -84,7 +86,7 @@ for item in range(0, 2):
     second_y = num_check("What is your second y point?")
 
     # appends the coordinates for this question
-    coordinates_list.append(f"({first_x}, {first_y}), ({second_x}, {second_y})")
+    questions_list.append(f"Question {question_num}:")
 
     # calculates the gradient
     gradient = calc_gradient(first_x, first_y, second_x, second_y)
@@ -100,7 +102,7 @@ for item in range(0, 2):
 
 # sets up dict
 answers = {
-    "Coordinate": coordinates_list,
+    "Question": questions_list,
     "Equation": equations_list,
     "Midpoint": midpoints_list,
     "Distance": distances_list,
@@ -111,6 +113,6 @@ answers = {
 valid_responses = ["gradient", "midpoint", "distance", "equation", "a", "all", "g", "m", "d", "e"]
 
 pandas_frame = pandas.DataFrame(answers)
-pandas_frame = pandas_frame.set_index('Coordinate')
-
+pandas_frame = pandas_frame.set_index('Question')
+print()
 print(pandas_frame)
