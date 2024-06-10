@@ -159,10 +159,25 @@ if want_instructions == "yes":
     instructions()
 
 # question num for pandas table and for how many program will answer
-question_num = 0
-questions_needed = num_check("How many question do you need answered? ")
+question_num = 1
 
-while question_num < questions_needed:
+while True:
+    questions_needed = num_check("How many question do you need answered? ")
+
+    # sends the users back to the start of the loop if their number is <= 0
+    if questions_needed <= 0:
+        print("Please only enter numbers higher than 0")
+        continue
+
+    else:
+        break
+
+
+while question_num <= questions_needed:
+
+    print()
+    print(f"Question {question_num}: ")
+
     # gets the 2 x and y points
     first_x = num_check("What is your first x point?")
     first_y = num_check("What is your first y point?")
