@@ -116,7 +116,7 @@ def calc_distance(x1, y1, x2, y2):
 
 
 # checks that users enter a valid response
-def print_answer(question, allowed_responses, answers):
+def wanted_answer(question, allowed_responses):
     while True:
 
         response = input(question).lower()
@@ -124,18 +124,11 @@ def print_answer(question, allowed_responses, answers):
         # prints everything if the user chose to do so according to the first
         # letter of the response
         if response[:1] == "a":
-            print()
-            print(answers[response[:1]])
-
-            # returns in the same format in order to be written to txt file
             return answers[response[:1]]
 
         # prints the answer the user wanted according
         # to the same format as the previous if statement
         elif response[:1] in allowed_responses:
-            print()
-            print(answers[response[:1]])
-
             return answers[response[:1]]
 
         else:
@@ -218,23 +211,22 @@ answers = {
 # sets up a list of valid answers
 valid_responses = ["gradient", "midpoint", "distance", "equation", "a", "all", "g", "m", "d", "e"]
 
-pandas_frame = pandas.DataFrame(answers)
+# asks the user what answers they'd like and prints them
+print()
+wanted_answers = wanted_answer("What answers would you like?", valid_responses)
+
+if wanted_answers == "a":
+    pandas_frame = pandas.DataFrame(answers)
+
+# note: need to fix and adjust wanted_answers to fit this code below
+
+else:
+    pandas_frame = pandas.DataFrame(answers[wanted_answers])
+
+
 pandas_frame = pandas_frame.set_index('Question')
 print()
 print(pandas_frame)
-
-# sets up dict
-# answers = {
-#     "e": equation,
-#     "m": midpoint,
-#     "d": distance,
-#     "g": gradient,
-#     "a": all_answers,
-# }
-
-# asks the user what answers they'd like and prints them
-# print()
-# wanted_answers = print_answer("What answers would you like?", valid_responses, answers)
 
 # change frame to a string so that we can export it to file
 pandas_frame = pandas.DataFrame.to_string(pandas_frame)
