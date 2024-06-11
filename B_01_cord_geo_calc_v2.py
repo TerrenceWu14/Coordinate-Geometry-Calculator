@@ -114,27 +114,6 @@ def calc_distance(x1, y1, x2, y2):
 
     return round(distance, 2)
 
-
-# checks that users enter a valid response
-def wanted_answer(question, allowed_responses):
-    while True:
-
-        response = input(question).lower()
-
-        # prints everything if the user chose to do so according to the first
-        # letter of the response
-        if response[:1] == "a":
-            return answers[response[:1]]
-
-        # prints the answer the user wanted according
-        # to the same format as the previous if statement
-        elif response[:1] in allowed_responses:
-            return answers[response[:1]]
-
-        else:
-            print(f"Please enter a response in {allowed_responses}")
-
-
 # sets up to_write list
 to_write = []
 
@@ -148,12 +127,14 @@ gradients_list = []
 # displays instructions if the user types "y" or "yes"
 want_instructions = yes_no("Do you want to see the instructions?")
 
+# if the user said yes it prints the instructions
 if want_instructions == "yes":
     instructions()
 
 # question num for pandas table and for how many program will answer
 question_num = 1
 
+# makes sure the user enters a number above 0
 while True:
     questions_needed = num_check("How many question do you need answered? ")
 
@@ -202,27 +183,14 @@ while question_num <= questions_needed:
 # sets up dict
 answers = {
     "Question": questions_list,
-    "Equation": equations_list,
-    "Midpoint": midpoints_list,
-    "Distance": distances_list,
-    "Gradient": gradients_list,
+    "equation": equations_list,
+    "midpoint": midpoints_list,
+    "distance": distances_list,
+    "gradient": gradients_list,
 }
 
-# sets up a list of valid answers
-valid_responses = ["gradient", "midpoint", "distance", "equation", "a", "all", "g", "m", "d", "e"]
-
-# asks the user what answers they'd like and prints them
-print()
-wanted_answers = wanted_answer("What answers would you like?", valid_responses)
-
-if wanted_answers == "a":
-    pandas_frame = pandas.DataFrame(answers)
-
-# note: need to fix and adjust wanted_answers to fit this code below
-
-else:
-    pandas_frame = pandas.DataFrame(answers[wanted_answers])
-
+# puts the answers and questions into the dataframe
+pandas_frame = pandas.DataFrame(answers)
 
 pandas_frame = pandas_frame.set_index('Question')
 print()
