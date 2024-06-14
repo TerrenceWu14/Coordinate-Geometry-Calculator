@@ -1,5 +1,6 @@
 import re
 
+# sets the pattern allowed
 pattern = r'[+-]?([0-9]*[.])?[0-9]+'
 
 while True:
@@ -8,9 +9,13 @@ while True:
     response = re.sub(r'[(),]', r'', response)
     print(response)
 
-    response = re.split(r'', response)
-
+    response = list(response)
     print(response)
+
+    first_x = response[0]
+    first_y = response[1]
+
+    print(f"First x: {first_x} and First y: {first_y}")
 
     #
     # if re.match(pattern, response):
