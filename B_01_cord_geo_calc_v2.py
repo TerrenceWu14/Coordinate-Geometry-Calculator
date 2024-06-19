@@ -1,5 +1,6 @@
 import math
 import pandas
+import re
 
 
 # checks that the user typed yes or no
@@ -114,8 +115,15 @@ def calc_distance(x1, y1, x2, y2):
 
     return round(distance, 2)
 
+
 # sets up to_write list
 to_write = []
+
+# sets up the variables for the coordinates
+first_x = 0
+first_y = 0
+second_x = 0
+second_y = 0
 
 # sets up the lists for panda dataframes
 questions_list = []
@@ -146,17 +154,48 @@ while True:
     else:
         break
 
-
 while question_num <= questions_needed:
 
     print()
     print(f"Question {question_num}: ")
 
-    # gets the 2 x and y points
-    first_x = num_check("What is your first x point?")
-    first_y = num_check("What is your first y point?")
-    second_x = num_check("What is your second x point?")
-    second_y = num_check("What is your second y point?")
+    while True:
+
+        point_num = 0
+
+        # gets the user's coordinates
+        response = input("Enter a coordinate (e.g. 3,4 or (5,2)) for both points: ")
+
+        # sets the pattern allowed
+        pattern = r'[(]?[+-]?([0-9]*[.])?[0-9]+[)]?'
+
+        # if the response matches the pattern it plays the code
+        if re.match(pattern, response):
+            # removes the brackets and white space
+            response = re.sub(r'[()\s]', r'', response)
+
+            # sets the x to the first num and y to second num after split
+            x_str, y_str = response.split(',')
+
+            # turns the response into a list
+            response = list(response)
+
+            if point_num == 1:
+
+                # sets the numbers for the second point
+                second_x = float(x_str)
+                second_y = float(y_str)
+
+                break
+
+            # converts the two strings into floats and sets it to the first point
+            first_x = float(x_str)
+            first_y = float(y_str)
+
+            point_num += 1
+
+        else:
+            print("Only enter floats or enter your numbers in the format (3,4) or 3,4")
 
     # calculates the gradient
     gradient = calc_gradient(first_x, first_y, second_x, second_y)
@@ -180,7 +219,7 @@ while question_num <= questions_needed:
     # appends the coordinates for this question
     questions_list.append(f"Question {question_num}:")
 
-# sets up dict
+# sets up dict for pandas table
 answers = {
     "Question": questions_list,
     "equation": equations_list,
