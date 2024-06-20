@@ -33,7 +33,8 @@ def instructions():
 ***** Instructions *****
 
 To begin, you enter your first x and y coordinates along with
-the second one. Then enter what answer's you'd like to see, for
+the second one (we ask you for both at the same time). 
+Then enter what answer's you'd like to see, for
 example: "equation" and it will give you the equation according 
 to the two x and y points you entered. 
 
@@ -217,11 +218,11 @@ while question_num <= questions_needed:
     distances_list.append(calc_distance(first_x, first_y, second_x, second_y))
     gradients_list.append(gradient)
 
-    # updates the question counter
-    question_num += 1
-
     # appends the coordinates for this question
     questions_list.append(f"Question {question_num}:")
+
+    # updates the question counter
+    question_num += 1
 
 # sets up dict for pandas table
 answers = {
