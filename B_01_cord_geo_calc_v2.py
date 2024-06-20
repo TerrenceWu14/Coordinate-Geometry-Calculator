@@ -156,12 +156,15 @@ while True:
 
 while question_num <= questions_needed:
 
+    # prints the question they are on
     print()
     print(f"Question {question_num}: ")
 
     while True:
 
-        point_num = 0
+        # initiates first_coordinate and sets it
+        # to true so the user enters the first coordinate
+        first_coordinate = True
 
         # gets the user's coordinates
         response = input("Enter a coordinate (e.g. 3,4 or (5,2)) for both points: ")
@@ -178,7 +181,7 @@ while question_num <= questions_needed:
             x_str, y_str = response.split(',')
 
             # sets the second point to their variables
-            if point_num == 1:
+            if not first_coordinate:
 
                 # sets the numbers for the second point
                 second_x = float(x_str)
@@ -190,7 +193,9 @@ while question_num <= questions_needed:
             first_x = float(x_str)
             first_y = float(y_str)
 
-            point_num += 1
+            # sets variable to false and allow the
+            # user to enter their second coordinate
+            first_coordinate = False
 
         else:
             print("Only enter floats or enter your numbers in the format (3,4) or 3,4")
@@ -212,6 +217,7 @@ while question_num <= questions_needed:
     distances_list.append(calc_distance(first_x, first_y, second_x, second_y))
     gradients_list.append(gradient)
 
+    # updates the question counter
     question_num += 1
 
     # appends the coordinates for this question
