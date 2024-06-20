@@ -177,9 +177,7 @@ while question_num <= questions_needed:
             # sets the x to the first num and y to second num after split
             x_str, y_str = response.split(',')
 
-            # turns the response into a list
-            response = list(response)
-
+            # sets the second point to their variables
             if point_num == 1:
 
                 # sets the numbers for the second point
