@@ -81,7 +81,7 @@ def calc_gradient(x1, y1, x2, y2):
         # finds the actual gradient
         gradient = diff_in_y / diff_in_x
 
-        return gradient
+        return round(gradient, 2)
 
     # prints error message if it is not able to be divided
     except ZeroDivisionError:
@@ -157,15 +157,15 @@ while True:
 
 while question_num <= questions_needed:
 
+    # initiates first_coordinate and sets it
+    # to true so the user enters the first coordinate
+    first_coordinate = True
+
     # prints the question they are on
     print()
     print(f"Question {question_num}: ")
 
     while True:
-
-        # initiates first_coordinate and sets it
-        # to true so the user enters the first coordinate
-        first_coordinate = True
 
         # gets the user's coordinates
         response = input("Enter a coordinate (e.g. 3,4 or (5,2)) for both points: ")
@@ -182,8 +182,8 @@ while question_num <= questions_needed:
             x_str, y_str = response.split(',')
 
             # sets the second point to their variables
-            if not first_coordinate:
-
+            if first_coordinate is False:
+                print("hi")
                 # sets the numbers for the second point
                 second_x = float(x_str)
                 second_y = float(y_str)
