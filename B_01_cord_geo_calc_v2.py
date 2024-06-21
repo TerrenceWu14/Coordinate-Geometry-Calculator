@@ -231,7 +231,9 @@ while question_num <= questions_needed:
     midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
     distance = calc_distance(first_x, first_y, second_x, second_y)
 
+    # makes every integer into an integer and keeps floats as floats
     gradient, y_intercept, midpoint, distance = map(format_int, (gradient, y_intercept, midpoint, distance))
+
     # appends and calculates (for some) the answers for the current coordinates
     equations_list.append(f"y = {gradient:.2f}x + {y_intercept:.2f}")
     midpoints_list.append(midpoint)
