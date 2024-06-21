@@ -117,6 +117,22 @@ def calc_distance(x1, y1, x2, y2):
     return round(distance, 2)
 
 
+# formats a number to an int
+def format_int(num):
+    # sets up a variable to compare the num to
+    int_form_num = int(num)
+    int(num)
+
+    # compares the two, if they are the same it returns
+    # the number as an integer
+    if int_form_num == num:
+        return int_form_num
+
+    # else it returns the num as it is
+    else:
+        return num
+
+
 # sets up to_write list
 to_write = []
 
@@ -212,10 +228,14 @@ while question_num <= questions_needed:
     # finds the equation for between the two points
     y_intercept = first_y - gradient * first_x
 
+    midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
+    distance = calc_distance(first_x, first_y, second_x, second_y)
+
+    gradient, y_intercept, midpoint, distance = map(format_int, (gradient, y_intercept, midpoint, distance))
     # appends and calculates (for some) the answers for the current coordinates
     equations_list.append(f"y = {gradient:.2f}x + {y_intercept:.2f}")
-    midpoints_list.append(calc_midpoint(first_x, first_y, second_x, second_y))
-    distances_list.append(calc_distance(first_x, first_y, second_x, second_y))
+    midpoints_list.append(midpoint)
+    distances_list.append(distance)
     gradients_list.append(gradient)
 
     # appends the coordinates for this question
