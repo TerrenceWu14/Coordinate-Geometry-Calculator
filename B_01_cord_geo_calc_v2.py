@@ -199,7 +199,6 @@ while question_num <= questions_needed:
 
             # sets the second point to their variables
             if first_coordinate is False:
-                print("hi")
                 # sets the numbers for the second point
                 second_x = float(x_str)
                 second_y = float(y_str)
@@ -232,6 +231,7 @@ while question_num <= questions_needed:
     distance = calc_distance(first_x, first_y, second_x, second_y)
 
     # makes every integer into an integer and keeps floats as floats
+    # and sets the values to their respective variables
     gradient, y_intercept, midpoint, distance = map(format_int, (gradient, y_intercept, midpoint, distance))
 
     # appends and calculates (for some) the answers for the current coordinates
@@ -249,10 +249,10 @@ while question_num <= questions_needed:
 # sets up dict for pandas table
 answers = {
     "Question": questions_list,
-    "equation": equations_list,
-    "midpoint": midpoints_list,
-    "distance": distances_list,
-    "gradient": gradients_list,
+    "Equation": equations_list,
+    "Midpoint": midpoints_list,
+    "Distance": distances_list,
+    "Gradient": gradients_list,
 }
 
 # puts the answers and questions into the dataframe
