@@ -104,9 +104,8 @@ def calc_midpoint(x1, y1, x2, y2):
 
     # puts the x and y middle points into one message
     # so that it displays as a coordinate
-    midpoint = f"Midpoint: ({x_mid:.2f}, {y_mid:.2f})"
 
-    return midpoint
+    return x_mid, y_mid
 
 
 # calculates the distance of the 2 points
@@ -187,7 +186,9 @@ while question_num <= questions_needed:
         response = input("Enter a coordinate (e.g. 3,4 or (5,2)) for both points: ")
 
         # sets the pattern allowed
-        pattern = r'[(]?[+-]?([0-9]*[.])?[0-9]+[)]?'
+
+        # note: just have to adjust the regex pattern
+        pattern = r'[(]?[-]?([0-9]*[.])?[0-9]+[)]?'
 
         # if the response matches the pattern it plays the code
         if re.match(pattern, response):
@@ -202,7 +203,6 @@ while question_num <= questions_needed:
                 # sets the numbers for the second point
                 second_x = float(x_str)
                 second_y = float(y_str)
-
                 break
 
             # converts the two strings into floats and sets it to the first point
@@ -227,16 +227,16 @@ while question_num <= questions_needed:
     # finds the equation for between the two points
     y_intercept = first_y - gradient * first_x
 
-    midpoint = calc_midpoint(first_x, first_y, second_x, second_y)
+    x_middle, y_middle = calc_midpoint(first_x, first_y, second_x, second_y)
     distance = calc_distance(first_x, first_y, second_x, second_y)
 
     # makes every integer into an integer and keeps floats as floats
     # and sets the values to their respective variables
-    gradient, y_intercept, midpoint, distance = map(format_int, (gradient, y_intercept, midpoint, distance))
+    gradient, y_intercept, x_middle, y_middle, distance = map(format_int, (gradient, y_intercept, x_middle, y_middle, distance))
 
     # appends and calculates (for some) the answers for the current coordinates
     equations_list.append(f"y = {gradient:.2f}x + {y_intercept:.2f}")
-    midpoints_list.append(midpoint)
+    midpoints_list.append(f"Midpoint: ({x_middle:.2f}, {y_middle:.2f})")
     distances_list.append(distance)
     gradients_list.append(gradient)
 
