@@ -34,9 +34,7 @@ def instructions():
 
 To begin, you enter your first x and y coordinates along with
 the second one (we ask you for both at the same time). 
-Then enter what answer's you'd like to see, for
-example: "equation" and it will give you the equation according 
-to the two x and y points you entered. 
+
 
 The list of answers that we can calculate for you are: 
 equation, gradient, midpoint and distance.
