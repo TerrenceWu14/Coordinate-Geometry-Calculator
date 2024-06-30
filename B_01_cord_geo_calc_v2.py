@@ -186,9 +186,7 @@ while question_num <= questions_needed:
         response = input("Enter a coordinate (e.g. 3,4 or (5,2)) for both points: ")
 
         # sets the pattern allowed
-
-        # note: just have to adjust the regex pattern
-        pattern = r'[(]?[-]?([0-9]*[.])?[0-9]+[)]?'
+        pattern = r'\(?-?\d+(\.\d+)?,\s?-?\d+(\.\d+)?\)?'
 
         # if the response matches the pattern it plays the code
         if re.match(pattern, response):
