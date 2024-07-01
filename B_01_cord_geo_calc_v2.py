@@ -44,6 +44,10 @@ for you to view or share with others if you'd like to do so.
 
 That's about it, thanks for using my coordinate geometry calculator! 
 
+Note: Large numbers may affect how the table of answers is shown 
+in the terminal but you will still see the full table if you 
+look at the txt file.
+
 *****************************************************************
     ''')
 
