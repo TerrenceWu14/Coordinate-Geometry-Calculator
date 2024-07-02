@@ -185,7 +185,20 @@ while question_num <= questions_needed:
     while True:
 
         # gets the user's coordinates
-        response = input("Enter a coordinate (e.g. 3,4 or (5,2)) for both points: ")
+        response = input("Enter a SINGLE coordinate (e.g. 3,4 or (5,2)): ")
+
+        # checks for emergency exits
+        if response == "xxx" and question_num != 1:
+            response = yes_no("Are you sure you want to exit?")
+
+            if response == "no":
+                continue
+
+            else:
+                break
+
+        else:
+            print("Please enter at least one set of coordinates")
 
         # sets the pattern allowed
         pattern = r'\(?-?\d+(\.\d+)?,\s?-?\d+(\.\d+)?\)?'
@@ -232,7 +245,8 @@ while question_num <= questions_needed:
 
     # makes every integer into an integer and keeps floats as floats
     # and sets the values to their respective variables
-    gradient, y_intercept, x_middle, y_middle, distance = map(format_int, (gradient, y_intercept, x_middle, y_middle, distance))
+    gradient, y_intercept, x_middle, y_middle, distance = map(format_int,
+                                                              (gradient, y_intercept, x_middle, y_middle, distance))
 
     # appends and calculates (for some) the answers for the current coordinates
     equations_list.append(f"y = {gradient:.2f}x + {y_intercept:.2f}")
@@ -284,3 +298,7 @@ for item in to_write:
 
 # closes file
 text_file.close()
+
+print("Thanks for using my Calculator. "
+      "All of these answers are also printed "
+      "onto a txt file called {text_file_name}.")
