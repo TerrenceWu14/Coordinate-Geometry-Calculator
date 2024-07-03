@@ -1,6 +1,7 @@
 import math
 import pandas
 import re
+from datetime import date
 
 
 # checks that the user typed yes or no
@@ -157,6 +158,29 @@ want_instructions = yes_no("Do you want to see the instructions?")
 if want_instructions == "yes":
     instructions()
 
+# get current date for heading and filename
+# get today's date
+today = date.today()
+
+# get day, month and year as individual string
+day = today.strftime("%d")
+month = today.strftime("%m")
+year = today.strftime("%Y")
+
+# asks the user if they want a custom file name
+custom_file = yes_no("Do you want a custom file name? If not we will use our default name. ")
+print("\nPlease note that if you use this program more than once in a day and also select the default name "
+      "more than once in a day it may overwrite the previous file and all the previous answers would be lost.\n")
+
+# gets them to enter it if yes else it defaults it to something else
+if custom_file == "yes":
+    file_name = input("What name would you like? ")
+
+# note: need to allow the file name to change on the daily basis (currently it does not
+# work with what I have right now)
+else:
+    file_name = f"Coordinate_Geometry_Answers {day}/{month}/{year}"
+
 # question num for pandas table and for how many program will answer
 question_num = 1
 
@@ -187,18 +211,18 @@ while question_num <= questions_needed:
         # gets the user's coordinates
         response = input("Enter a SINGLE coordinate (e.g. 3,4 or (5,2)): ")
 
-        # checks for emergency exits
-        if response == "xxx" and question_num != 1:
-            response = yes_no("Are you sure you want to exit?")
-
-            if response == "no":
-                continue
-
-            else:
-                break
-
-        else:
-            print("Please enter at least one set of coordinates")
+        # # checks for emergency exits
+        # if response == "xxx" and question_num != 1:
+        #     response = yes_no("Are you sure you want to exit?")
+        #
+        #     if response == "no":
+        #         continue
+        #
+        #     else:
+        #         break
+        #
+        # else:
+        #     print("Please enter at least one set of coordinates")
 
         # sets the pattern allowed
         pattern = r'\(?-?\d+(\.\d+)?,\s?-?\d+(\.\d+)?\)?'
@@ -284,11 +308,14 @@ to_write.append(pandas_frame)
 
 # write to file
 # create file to hold data(add .txt extension)
-file_name = "Coordinate Geometry Calculator Answers.txt"
-text_file = open(file_name, "w+")
+write_to = f"{file_name}.txt"
+
+text_file = open(write_to, "w+")
+
+heading = f"Coordinate Geometry Calculator Answers {day}/{month}/{year}"
 
 # heading
-text_file.write(f"***** {file_name}"
+text_file.write(f"***** {heading}"
                 f" ***** \n \n")
 
 # writes all the items into the text file
@@ -299,6 +326,6 @@ for item in to_write:
 # closes file
 text_file.close()
 
-print("Thanks for using my Calculator. "
+print("\nThanks for using my Calculator. "
       "All of these answers are also printed "
-      "onto a txt file called {text_file_name}.")
+      f"onto a txt file called {write_to}.")
