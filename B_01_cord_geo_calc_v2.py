@@ -1,6 +1,7 @@
 import math
 import pandas
 import re
+import random
 from datetime import date
 
 
@@ -158,28 +159,21 @@ want_instructions = yes_no("Do you want to see the instructions?")
 if want_instructions == "yes":
     instructions()
 
-# get current date for heading and filename
-# get today's date
-today = date.today()
-
-# get day, month and year as individual string
-day = today.strftime("%d")
-month = today.strftime("%m")
-year = today.strftime("%Y")
 
 # asks the user if they want a custom file name
 custom_file = yes_no("Do you want a custom file name? If not we will use our default name. ")
-print("\nPlease note that if you use this program more than once in a day and also select the default name "
-      "more than once in a day it may overwrite the previous file and all the previous answers would be lost.\n")
 
 # gets them to enter it if yes else it defaults it to something else
 if custom_file == "yes":
     file_name = input("What name would you like? ")
 
-# note: need to allow the file name to change on the daily basis (currently it does not
-# work with what I have right now)
 else:
-    file_name = f"Coordinate_Geometry_Answers {day}/{month}/{year}"
+
+    number = random.getrandbits(16)
+
+    # randomizes the numbers so it won't overwrite any files
+    file_name = f"Coordinate_Geometry_Answers" \
+                f"_{number}"
 
 # question num for pandas table and for how many program will answer
 question_num = 1
@@ -209,7 +203,7 @@ while question_num <= questions_needed:
     while True:
 
         # gets the user's coordinates
-        response = input("Enter a SINGLE coordinate (e.g. 3,4 or (5,2)): ")
+        response = input("Enter a single coordinate (e.g. 3,4 or (5,2)): ")
 
         # # checks for emergency exits
         # if response == "xxx" and question_num != 1:
@@ -311,6 +305,15 @@ to_write.append(pandas_frame)
 write_to = f"{file_name}.txt"
 
 text_file = open(write_to, "w+")
+
+# get current date for heading and filename
+# get today's date
+today = date.today()
+
+# get day, month and year as individual string
+day = today.strftime("%d")
+month = today.strftime("%m")
+year = today.strftime("%Y")
 
 heading = f"Coordinate Geometry Calculator Answers {day}/{month}/{year}"
 
