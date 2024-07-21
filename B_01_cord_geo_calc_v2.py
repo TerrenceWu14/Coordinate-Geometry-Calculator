@@ -229,6 +229,12 @@ while question_num <= questions_needed:
             # sets the x to the first num and y to second num after split
             x_str, y_str = response.split(',')
 
+            if ValueError:
+
+                print("Please enter the coordinate in the format (3,4) or 3,4 with only one coordinate each time. "
+                      "Spaces don't matter.\n")
+                continue
+
             # sets the second point to their variables
             if first_coordinate is False:
                 # sets the numbers for the second point
