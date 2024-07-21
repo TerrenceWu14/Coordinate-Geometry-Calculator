@@ -207,7 +207,7 @@ while question_num <= questions_needed:
 
         # # checks for emergency exits
         # if response == "xxx" and question_num != 1:
-        #     response = yes_no("Are you sure you want to exit?")
+        #     response = yes_no("\nAre you sure you want to exit?")
         #
         #     if response == "no":
         #         continue
@@ -216,7 +216,7 @@ while question_num <= questions_needed:
         #         break
         #
         # else:
-        #     print("Please enter at least one set of coordinates")
+        #     print("Please enter at least one pair of coordinates")
 
         # sets the pattern allowed
         pattern = r'\(?-?\d+(\.\d+)?,\s?-?\d+(\.\d+)?\)?'
@@ -229,11 +229,11 @@ while question_num <= questions_needed:
             # sets the x to the first num and y to second num after split
             x_str, y_str = response.split(',')
 
-            if ValueError:
-
-                print("Please enter the coordinate in the format (3,4) or 3,4 with only one coordinate each time. "
-                      "Spaces don't matter.\n")
-                continue
+            # if ValueError:
+            #
+            #     print("Please enter the coordinate in the format (3,4) or 3,4 with only one coordinate each time. "
+            #           "Spaces don't matter.\n")
+            #     continue
 
             # sets the second point to their variables
             if first_coordinate is False:
