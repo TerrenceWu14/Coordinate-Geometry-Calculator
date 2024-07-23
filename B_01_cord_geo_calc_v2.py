@@ -170,7 +170,6 @@ if custom_file == "yes":
 else:
 
     number = random.getrandbits(16)
-
     # randomizes the numbers so it won't overwrite any files
     file_name = f"Coordinate_Geometry_Answers" \
                 f"_{number}"
@@ -219,7 +218,7 @@ while question_num <= questions_needed:
         #     print("Please enter at least one pair of coordinates")
 
         # sets the pattern allowed
-        pattern = r'\(?-?\d+(\.\d+)?,\s?-?\d+(\.\d+)?\)?'
+        pattern = r'^\(?-?\d+(\.\d+)?,\s?-?\d+(\.\d+)?\)?$'
 
         # if the response matches the pattern it plays the code
         if re.match(pattern, response):
@@ -228,12 +227,6 @@ while question_num <= questions_needed:
 
             # sets the x to the first num and y to second num after split
             x_str, y_str = response.split(',')
-
-            # if ValueError:
-            #
-            #     print("Please enter the coordinate in the format (3,4) or 3,4 with only one coordinate each time. "
-            #           "Spaces don't matter.\n")
-            #     continue
 
             # sets the second point to their variables
             if first_coordinate is False:
