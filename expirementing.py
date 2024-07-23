@@ -1,21 +1,12 @@
-def format_int(num):
-    int_form_num = int(num)
-    int(num)
+import re
 
-    if int_form_num == num:
-        return int_form_num
+pattern = r'^\(?-?\d+(\.\d+)?,\s?-?\d+(\.\d+)?\)?$'
+
+# Test cases
+test_cases = ["(1, 2)", "1,2", "1, 2", "1,2,3", "(1, 2, 3)", "(1.0, -2.5)", "-1.2, 3.4", "(1.2, 3.4)"]
+
+for test in test_cases:
+    if re.match(pattern, test):
+        print(f"'{test}' is a valid point.")
     else:
-        return num
-
-
-gradient = 5.2
-y_intercept = 10.0
-midpoint = -2.64
-distance = 3
-
-gradient, y_intercept, midpoint, distance = map(format_int, (gradient, y_intercept, midpoint, distance))
-
-print(gradient)
-print(y_intercept)
-print(midpoint)
-print(distance)
+        print(f"'{test}' is NOT a valid point.")
