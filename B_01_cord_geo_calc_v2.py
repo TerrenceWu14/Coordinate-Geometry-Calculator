@@ -46,8 +46,8 @@ for you to view or share with others if you'd like to do so.
 
 That's about it, thanks for using my coordinate geometry calculator! 
 
-Note: Large numbers may affect how the table of answers is shown 
-in the terminal but you will still see the full table if you 
+Note: Large numbers may affect how the table of answers is displayed
+but you will still see the full table if you 
 look at the txt file.
 
 *****************************************************************
@@ -80,24 +80,8 @@ def calc_gradient(x1, y1, x2, y2):
     diff_in_y = y2 - y1
     diff_in_x = x2 - x1
 
-    # tries to divide the two variables
-    try:
-        # finds the actual gradient
-        gradient = diff_in_y / diff_in_x
-
-        return round(gradient, 2)
-
-    # prints error message if it is not able to be divided
-    except ZeroDivisionError:
-        print()
-        print("Check if it's a horizontal or vertical line.\nThis is because "
-              "the gradient is 0 or indefinite from our calculations.\n"
-              "Otherwise please re-enter your x and y points.")
-        print()
-
-        re_enter = "yes"
-
-        return re_enter
+    # finds the actual gradient
+    gradient = diff_in_y / diff_in_x
 
 
 # calculates the midpoint of the 2 points
@@ -144,6 +128,7 @@ first_x = 0
 first_y = 0
 second_x = 0
 second_y = 0
+gradient = 0
 
 # sets up the lists for panda dataframes
 questions_list = []
@@ -159,9 +144,8 @@ want_instructions = yes_no("Do you want to see the instructions?")
 if want_instructions == "yes":
     instructions()
 
-
 # asks the user if they want a custom file name
-custom_file = yes_no("Do you want a custom file name? If not we will use our default name. ")
+custom_file = yes_no("Do you want a custom file name? If not we will randomly generate one. ")
 
 # gets them to enter it if yes else it defaults it to something else
 if custom_file == "yes":
@@ -206,14 +190,15 @@ while question_num <= questions_needed:
 
         # # checks for emergency exits
         # if response == "xxx" and question_num != 1:
-        #     response = yes_no("\nAre you sure you want to exit?")
         #
-        #     if response == "no":
+        #     confirm_exit = yes_no("\nAre you sure you want to exit?")
+        #
+        #     if confirm_exit == "no":
         #         continue
         #
         #     else:
         #         break
-        #
+
         # else:
         #     print("Please enter at least one pair of coordinates")
 
@@ -246,13 +231,21 @@ while question_num <= questions_needed:
         else:
             print("Only enter floats or enter your numbers in the format (3,4) or 3,4")
 
-    # calculates the gradient
-    gradient = calc_gradient(first_x, first_y, second_x, second_y)
+    # tries to calculate the gradient
+    try:
+        gradient = calc_gradient(first_x, first_y, second_x, second_y)
 
-    # if there is an error with the calculation fo the gradient
-    # sends the user back to the start of the loop to re-enter their points
-    if gradient == "yes":
-        continue
+    # prints error message if it is not able to be divided
+    except ZeroDivisionError:
+
+        # lets the user know that the coordinates they just entered are a vertical/horizontal line
+        if first_y == second_y:
+            print(f"This is a horizontal line with the equation: y = {first_y}")
+            equations_list.append(f"y = {first_y}")
+
+        else:
+            print(f"This is a vertical line with the equation: x = {first_x}")
+            equations_list.append(f"x = {first_x}")
 
     # finds the equation for between the two points
     y_intercept = first_y - gradient * first_x
