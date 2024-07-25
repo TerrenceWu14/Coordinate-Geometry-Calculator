@@ -107,8 +107,8 @@ def calc_distance(x1, y1, x2, y2):
 # formats a number to an int
 def format_int(num):
     # sets up a variable to compare the num to
-    int_form_num = int(num)
     int(num)
+    int_form_num = int(num)
 
     # compares the two, if they are the same it returns
     # the number as an integer
@@ -128,7 +128,10 @@ first_x = 0
 first_y = 0
 second_x = 0
 second_y = 0
+
+# defines some variables
 gradient = 0
+y_intercept = 0
 
 # sets up the lists for panda dataframes
 questions_list = []
@@ -136,6 +139,7 @@ equations_list = []
 midpoints_list = []
 distances_list = []
 gradients_list = []
+y_intercept_list = []
 
 # displays instructions if the user types "y" or "yes"
 want_instructions = yes_no("Do you want to see the instructions?")
@@ -240,26 +244,44 @@ while question_num <= questions_needed:
 
         # lets the user know that the coordinates they just entered are a vertical/horizontal line
         if first_y == second_y:
-            print(f"This is a horizontal line with the equation: y = {first_y}")
-            equations_list.append(f"y = {first_y}")
 
-        else:
+            print(f"This is a horizontal line with the equation: y = {first_y}")
+
+            # makes sure to convert to int if possible
+            horizontal_line = format_int(first_y)
+
+            equations_list.append(f"y = {horizontal_line}")
+
+            # sets y intercept the point where line touches y int
+            y_intercept = first_y
+            y_intercept_list.append(y_intercept)
+
+        elif first_x == second_x:
+
             print(f"This is a vertical line with the equation: x = {first_x}")
             equations_list.append(f"x = {first_x}")
 
-    # finds the equation for between the two points
-    y_intercept = first_y - gradient * first_x
+            # sets y intercept to indefinite as there is no y intercept
+            y_intercept = "Indefinite"
 
+        else:
+
+            y_intercept = first_y - gradient * first_x
+
+            equations_list.append(f"y = {gradient:.2f}x + {y_intercept}")
+            y_intercept_list.append(y_intercept)
+
+    # calculates the midpoint and distance for each point
     x_middle, y_middle = calc_midpoint(first_x, first_y, second_x, second_y)
     distance = calc_distance(first_x, first_y, second_x, second_y)
 
     # makes every integer into an integer and keeps floats as floats
     # and sets the values to their respective variables
-    gradient, y_intercept, x_middle, y_middle, distance = map(format_int,
-                                                              (gradient, y_intercept, x_middle, y_middle, distance))
+    gradient, x_middle, y_middle, distance = map(format_int,
+                                                 (gradient, x_middle, y_middle, distance))
 
     # appends and calculates (for some) the answers for the current coordinates
-    equations_list.append(f"y = {gradient:.2f}x + {y_intercept:.2f}")
+
     midpoints_list.append(f"Midpoint: ({x_middle:.2f}, {y_middle:.2f})")
     distances_list.append(distance)
     gradients_list.append(gradient)
@@ -277,6 +299,7 @@ answers = {
     "Midpoint": midpoints_list,
     "Distance": distances_list,
     "Gradient": gradients_list,
+    "Y Intercept": y_intercept_list,
 }
 
 # puts the answers and questions into the dataframe
