@@ -107,7 +107,6 @@ def calc_distance(x1, y1, x2, y2):
 # formats a number to an int
 def format_int(num):
     # sets up a variable to compare the num to
-    int(num)
     int_form_num = int(num)
 
     # compares the two, if they are the same it returns
@@ -132,6 +131,7 @@ second_y = 0
 # defines some variables
 gradient = 0
 y_intercept = 0
+coordinate = "first"
 
 # sets up the lists for panda dataframes
 questions_list = []
@@ -167,7 +167,7 @@ question_num = 1
 
 # makes sure the user enters a number above 0
 while True:
-    questions_needed = num_check("How many question do you need answered? ")
+    questions_needed = num_check("How many questions do you need answered? ")
 
     # sends the users back to the start of the loop if their number is <= 0
     if questions_needed <= 0:
@@ -190,7 +190,7 @@ while question_num <= questions_needed:
     while True:
 
         # gets the user's coordinates
-        response = input("Enter a single coordinate (e.g. 3,4 or (5,2)): ")
+        response = input(f"Enter your {coordinate} coordinate (e.g. 3,4 or (5,2)): ")
 
         # # checks for emergency exits
         # if response == "xxx" and question_num != 1:
@@ -218,7 +218,7 @@ while question_num <= questions_needed:
             x_str, y_str = response.split(',')
 
             # sets the second point to their variables
-            if first_coordinate is False:
+            if coordinate == "second":
                 # sets the numbers for the second point
                 second_x = float(x_str)
                 second_y = float(y_str)
@@ -230,7 +230,7 @@ while question_num <= questions_needed:
 
             # sets variable to false and allow the
             # user to enter their second coordinate
-            first_coordinate = False
+            coordinate = "second"
 
         else:
             print("Only enter floats or enter your numbers in the format (3,4) or 3,4")
@@ -245,20 +245,21 @@ while question_num <= questions_needed:
         # lets the user know that the coordinates they just entered are a vertical/horizontal line
         if first_y == second_y:
 
-            print(f"This is a horizontal line with the equation: y = {first_y}")
-
             # makes sure to convert to int if possible
             horizontal_line = format_int(first_y)
+
+            print(f"\nThis is a horizontal line with the equation: y = {first_y}")
 
             equations_list.append(f"y = {horizontal_line}")
 
             # sets y intercept the point where line touches y int
-            y_intercept = first_y
-            y_intercept_list.append(y_intercept)
+            y_intercept_list.append(horizontal_line)
 
         elif first_x == second_x:
 
-            print(f"This is a vertical line with the equation: x = {first_x}")
+            vertical_line = format_int(first_x)
+
+            print(f"\nThis is a vertical line with the equation: x = {first_x}")
             equations_list.append(f"x = {first_x}")
 
             # sets y intercept to indefinite as there is no y intercept
@@ -277,8 +278,7 @@ while question_num <= questions_needed:
 
     # makes every integer into an integer and keeps floats as floats
     # and sets the values to their respective variables
-    gradient, x_middle, y_middle, distance = map(format_int,
-                                                 (gradient, x_middle, y_middle, distance))
+    gradient, x_middle, y_middle, distance = map(format_int, [gradient, x_middle, y_middle, distance])
 
     # appends and calculates (for some) the answers for the current coordinates
 
