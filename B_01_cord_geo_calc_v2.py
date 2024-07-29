@@ -83,6 +83,8 @@ def calc_gradient(x1, y1, x2, y2):
     # finds the actual gradient
     gradient = diff_in_y / diff_in_x
 
+    return gradient
+
 
 # calculates the midpoint of the 2 points
 def calc_midpoint(x1, y1, x2, y2):
@@ -108,6 +110,7 @@ def calc_distance(x1, y1, x2, y2):
 def format_int(num):
     # sets up a variable to compare the num to
     int_form_num = int(num)
+    int(num)
 
     # compares the two, if they are the same it returns
     # the number as an integer
@@ -222,14 +225,18 @@ while question_num <= questions_needed:
                 # sets the numbers for the second point
                 second_x = float(x_str)
                 second_y = float(y_str)
+
+                # resets it so it can be used next time
+                coordinate = "first"
                 break
 
-            # converts the two strings into floats and sets it to the first point
-            first_x = float(x_str)
-            first_y = float(y_str)
+            else:
+                # converts the two strings into floats and sets it to the first point
+                first_x = float(x_str)
+                first_y = float(y_str)
 
-            # sets variable to false and allow the
-            # user to enter their second coordinate
+            # sets the coordinate to second to let the user know
+            # it is the second coordinate they are entering
             coordinate = "second"
 
         else:
@@ -253,7 +260,6 @@ while question_num <= questions_needed:
             equations_list.append(f"y = {horizontal_line}")
 
             # sets y intercept the point where line touches y int
-            y_intercept_list.append(horizontal_line)
 
         elif first_x == second_x:
 
@@ -264,11 +270,10 @@ while question_num <= questions_needed:
 
             # sets y intercept to indefinite as there is no y intercept
             y_intercept = "Indefinite"
+            y_intercept_list.append(y_intercept)
 
         else:
-
             y_intercept = first_y - gradient * first_x
-
             equations_list.append(f"y = {gradient:.2f}x + {y_intercept}")
             y_intercept_list.append(y_intercept)
 
@@ -276,12 +281,13 @@ while question_num <= questions_needed:
     x_middle, y_middle = calc_midpoint(first_x, first_y, second_x, second_y)
     distance = calc_distance(first_x, first_y, second_x, second_y)
 
+    print((gradient, x_middle, y_middle, distance))
+
     # makes every integer into an integer and keeps floats as floats
     # and sets the values to their respective variables
-    gradient, x_middle, y_middle, distance = map(format_int, [gradient, x_middle, y_middle, distance])
+    gradient, x_middle, y_middle, distance = map(format_int, (gradient, x_middle, y_middle, distance))
 
     # appends and calculates (for some) the answers for the current coordinates
-
     midpoints_list.append(f"Midpoint: ({x_middle:.2f}, {y_middle:.2f})")
     distances_list.append(distance)
     gradients_list.append(gradient)
