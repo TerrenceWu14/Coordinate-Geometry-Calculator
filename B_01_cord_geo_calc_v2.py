@@ -245,6 +245,9 @@ while question_num <= questions_needed:
     # tries to calculate the gradient
     try:
         gradient = calc_gradient(first_x, first_y, second_x, second_y)
+        y_intercept = first_y - gradient * first_x
+        equations_list.append(f"y = {gradient:.2f}x + {y_intercept}")
+        y_intercept_list.append(y_intercept)
 
     # prints error message if it is not able to be divided
     except ZeroDivisionError:
@@ -260,6 +263,7 @@ while question_num <= questions_needed:
             equations_list.append(f"y = {horizontal_line}")
 
             # sets y intercept the point where line touches y int
+            y_intercept_list.append(f"y = {horizontal_line}")
 
         elif first_x == second_x:
 
@@ -272,16 +276,9 @@ while question_num <= questions_needed:
             y_intercept = "Indefinite"
             y_intercept_list.append(y_intercept)
 
-        else:
-            y_intercept = first_y - gradient * first_x
-            equations_list.append(f"y = {gradient:.2f}x + {y_intercept}")
-            y_intercept_list.append(y_intercept)
-
     # calculates the midpoint and distance for each point
     x_middle, y_middle = calc_midpoint(first_x, first_y, second_x, second_y)
     distance = calc_distance(first_x, first_y, second_x, second_y)
-
-    print((gradient, x_middle, y_middle, distance))
 
     # makes every integer into an integer and keeps floats as floats
     # and sets the values to their respective variables
