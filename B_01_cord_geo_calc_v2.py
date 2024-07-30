@@ -39,7 +39,7 @@ the second one (we ask you for both at the same time).
 
 
 The list of answers that we can calculate for you are: 
-equation, gradient, midpoint and distance.
+equation, gradient, midpoint, y intercept and distance.
 
 After we give you your answer we also put it all onto a txt file 
 for you to view or share with others if you'd like to do so.
@@ -119,7 +119,7 @@ def format_int(num):
 
     # else it returns the num as it is
     else:
-        return num
+        return round(num, 2)
 
 
 # sets up to_write list
@@ -245,8 +245,13 @@ while question_num <= questions_needed:
     # tries to calculate the gradient
     try:
         gradient = calc_gradient(first_x, first_y, second_x, second_y)
+
+        # calculates and rounds the y int
         y_intercept = first_y - gradient * first_x
-        equations_list.append(f"y = {gradient:.2f}x + {y_intercept}")
+        y_intercept = format_int(y_intercept)
+
+        # appends the two answers to their lists
+        equations_list.append(f"y = {format_int(gradient)}x + {y_intercept}")
         y_intercept_list.append(y_intercept)
 
     # prints error message if it is not able to be divided
@@ -258,7 +263,7 @@ while question_num <= questions_needed:
             # makes sure to convert to int if possible
             horizontal_line = format_int(first_y)
 
-            print(f"\nThis is a horizontal line with the equation: y = {first_y}")
+            print(f"\nThis is a horizontal line with the equation: y = {horizontal_line}")
 
             equations_list.append(f"y = {horizontal_line}")
 
@@ -269,8 +274,8 @@ while question_num <= questions_needed:
 
             vertical_line = format_int(first_x)
 
-            print(f"\nThis is a vertical line with the equation: x = {first_x}")
-            equations_list.append(f"x = {first_x}")
+            print(f"\nThis is a vertical line with the equation: x = {vertical_line}")
+            equations_list.append(f"x = {vertical_line}")
 
             # sets y intercept to indefinite as there is no y intercept
             y_intercept = "Indefinite"
@@ -285,7 +290,7 @@ while question_num <= questions_needed:
     gradient, x_middle, y_middle, distance = map(format_int, (gradient, x_middle, y_middle, distance))
 
     # appends and calculates (for some) the answers for the current coordinates
-    midpoints_list.append(f"Midpoint: ({x_middle:.2f}, {y_middle:.2f})")
+    midpoints_list.append(f"Midpoint: ({x_middle}, {y_middle})")
     distances_list.append(distance)
     gradients_list.append(gradient)
 
