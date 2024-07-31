@@ -135,6 +135,7 @@ second_y = 0
 gradient = 0
 y_intercept = 0
 coordinate = "first"
+response = ""
 
 # sets up the lists for panda dataframes
 questions_list = []
@@ -180,7 +181,7 @@ while True:
     else:
         break
 
-while question_num <= questions_needed:
+while question_num <= questions_needed and response != "xxx":
 
     # initiates first_coordinate and sets it
     # to true so the user enters the first coordinate
@@ -195,19 +196,15 @@ while question_num <= questions_needed:
         # gets the user's coordinates
         response = input(f"Enter your {coordinate} coordinate (e.g. 3,4 or (5,2)): ")
 
-        # # checks for emergency exits
-        # if response == "xxx" and question_num != 1:
-        #
-        #     confirm_exit = yes_no("\nAre you sure you want to exit?")
-        #
-        #     if confirm_exit == "no":
-        #         continue
-        #
-        #     else:
-        #         break
+        # checks for emergency exits
+        if response == "xxx":
 
-        # else:
-        #     print("Please enter at least one pair of coordinates")
+            if question_num == 1:
+                print("Please enter at least one pair of coordinates\n")
+                continue
+
+            else:
+                break
 
         # sets the pattern allowed
         pattern = r'^\(?-?\d+(\.\d+)?,\s?-?\d+(\.\d+)?\)?$'
@@ -240,7 +237,7 @@ while question_num <= questions_needed:
             coordinate = "second"
 
         else:
-            print("Only enter floats or enter your numbers in the format (3,4) or 3,4")
+            print("\nOnly enter floats or enter your numbers in the format (3,4) or 3,4")
 
     # tries to calculate the gradient
     try:
