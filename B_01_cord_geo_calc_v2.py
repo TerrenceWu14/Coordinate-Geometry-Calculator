@@ -183,13 +183,12 @@ while True:
 
 while question_num <= questions_needed and response != "xxx":
 
-    # initiates first_coordinate and sets it
-    # to true so the user enters the first coordinate
-    first_coordinate = True
-
     # prints the question they are on
     print()
     print(f"Question {question_num}: ")
+
+    # resets it so it can be used next time
+    coordinate = "first"
 
     while True:
 
@@ -211,6 +210,7 @@ while question_num <= questions_needed and response != "xxx":
 
         # if the response matches the pattern it plays the code
         if re.match(pattern, response):
+
             # removes the brackets and white space
             response = re.sub(r'[()\s]', r'', response)
 
@@ -223,8 +223,65 @@ while question_num <= questions_needed and response != "xxx":
                 second_x = float(x_str)
                 second_y = float(y_str)
 
-                # resets it so it can be used next time
-                coordinate = "first"
+                # tries to calculate the gradient
+                try:
+                    gradient = calc_gradient(first_x, first_y, second_x, second_y)
+
+                    # calculates and rounds the y int
+                    y_intercept = first_y - gradient * first_x
+                    y_intercept = format_int(y_intercept)
+
+                    # appends the two answers to their lists
+                    equations_list.append(f"y = {format_int(gradient)}x + {y_intercept}")
+                    y_intercept_list.append(f"y = {y_intercept}")
+
+                # prints error message if it is not able to be divided
+                except ZeroDivisionError:
+
+                    # lets the user know that the coordinates they just entered are a vertical/horizontal line
+                    if first_y == second_y:
+
+                        # makes sure to convert to int if possible
+                        horizontal_line = format_int(first_y)
+
+                        print(f"\nThis is a horizontal line with the equation: y = {horizontal_line}")
+
+                        equations_list.append(f"y = {horizontal_line}")
+
+                        # sets y intercept the point where line touches y int
+                        y_intercept_list.append(f"y = {horizontal_line}")
+
+                    elif first_x == second_x:
+
+                        # makes sure to convert to int if possible
+                        vertical_line = format_int(first_x)
+
+                        print(f"\nThis is a vertical line with the equation: x = {vertical_line}")
+                        equations_list.append(f"x = {vertical_line}")
+
+                        # sets y intercept to indefinite as there is no y intercept
+                        y_intercept = "Indefinite"
+                        y_intercept_list.append(y_intercept)
+
+                # calculates the midpoint and distance for each point
+                x_middle, y_middle = calc_midpoint(first_x, first_y, second_x, second_y)
+                distance = calc_distance(first_x, first_y, second_x, second_y)
+
+                # makes every integer into an integer and keeps floats as floats
+                # and sets the values to their respective variables
+                gradient, x_middle, y_middle, distance = map(format_int, (gradient, x_middle, y_middle, distance))
+
+                # appends and calculates (for some) the answers for the current coordinates
+                midpoints_list.append(f"Midpoint: ({x_middle}, {y_middle})")
+                distances_list.append(distance)
+                gradients_list.append(gradient)
+
+                # appends the coordinates for this question
+                questions_list.append(f"Question {question_num}:")
+
+                # updates the question counter
+                question_num += 1
+
                 break
 
             else:
@@ -232,70 +289,12 @@ while question_num <= questions_needed and response != "xxx":
                 first_x = float(x_str)
                 first_y = float(y_str)
 
-            # sets the coordinate to second to let the user know
-            # it is the second coordinate they are entering
-            coordinate = "second"
+                # sets the coordinate to second to let the user know
+                # it is the second coordinate they are entering
+                coordinate = "second"
 
         else:
             print("\nOnly enter floats or enter your numbers in the format (3,4) or 3,4")
-
-    # tries to calculate the gradient
-    try:
-        gradient = calc_gradient(first_x, first_y, second_x, second_y)
-
-        # calculates and rounds the y int
-        y_intercept = first_y - gradient * first_x
-        y_intercept = format_int(y_intercept)
-
-        # appends the two answers to their lists
-        equations_list.append(f"y = {format_int(gradient)}x + {y_intercept}")
-        y_intercept_list.append(y_intercept)
-
-    # prints error message if it is not able to be divided
-    except ZeroDivisionError:
-
-        # lets the user know that the coordinates they just entered are a vertical/horizontal line
-        if first_y == second_y:
-
-            # makes sure to convert to int if possible
-            horizontal_line = format_int(first_y)
-
-            print(f"\nThis is a horizontal line with the equation: y = {horizontal_line}")
-
-            equations_list.append(f"y = {horizontal_line}")
-
-            # sets y intercept the point where line touches y int
-            y_intercept_list.append(f"y = {horizontal_line}")
-
-        elif first_x == second_x:
-
-            vertical_line = format_int(first_x)
-
-            print(f"\nThis is a vertical line with the equation: x = {vertical_line}")
-            equations_list.append(f"x = {vertical_line}")
-
-            # sets y intercept to indefinite as there is no y intercept
-            y_intercept = "Indefinite"
-            y_intercept_list.append(y_intercept)
-
-    # calculates the midpoint and distance for each point
-    x_middle, y_middle = calc_midpoint(first_x, first_y, second_x, second_y)
-    distance = calc_distance(first_x, first_y, second_x, second_y)
-
-    # makes every integer into an integer and keeps floats as floats
-    # and sets the values to their respective variables
-    gradient, x_middle, y_middle, distance = map(format_int, (gradient, x_middle, y_middle, distance))
-
-    # appends and calculates (for some) the answers for the current coordinates
-    midpoints_list.append(f"Midpoint: ({x_middle}, {y_middle})")
-    distances_list.append(distance)
-    gradients_list.append(gradient)
-
-    # appends the coordinates for this question
-    questions_list.append(f"Question {question_num}:")
-
-    # updates the question counter
-    question_num += 1
 
 # sets up dict for pandas table
 answers = {
