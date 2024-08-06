@@ -122,6 +122,19 @@ def format_int(num):
         return round(num, 2)
 
 
+# formats the equation according to the y int
+def format_equation(gradient, y_int):
+
+    # makes the + a - symbol instead if it's a negative
+    if y_int < 0:
+        equation = f"y = {gradient} - {y_int}"
+
+    else:
+        equation = f"y = {gradient} + {y_int}"
+
+    return equation
+
+
 # sets up to_write list
 to_write = []
 
@@ -246,7 +259,7 @@ while question_num <= questions_needed and response != "xxx":
 
                         # appends the two answers to their lists
                         y_intercept_list.append(f"y = {y_intercept}")
-                        equations_list.append(f"y = {format_int(gradient)}x + {y_intercept}")
+                        equations_list.append(format_equation(gradient, y_intercept))
 
                 # prints error message if it is not able to be divided
                 except ZeroDivisionError:
