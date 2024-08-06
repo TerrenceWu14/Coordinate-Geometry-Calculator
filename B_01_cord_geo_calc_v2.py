@@ -127,10 +127,10 @@ def format_equation(gradient, y_int):
 
     # makes the + a - symbol instead if it's a negative
     if y_int < 0:
-        equation = f"y = {gradient} - {y_int}"
+        equation = f"y = {gradient}x - {abs(y_int)}"
 
     else:
-        equation = f"y = {gradient} + {y_int}"
+        equation = f"y = {gradient}x + {y_int}"
 
     return equation
 
