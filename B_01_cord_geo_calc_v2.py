@@ -227,20 +227,8 @@ while question_num <= questions_needed and response != "xxx":
                 try:
                     gradient = calc_gradient(first_x, first_y, second_x, second_y)
 
-                    # calculates and rounds the y int
-                    y_intercept = first_y - gradient * first_x
-                    y_intercept = format_int(y_intercept)
-
-                    # appends the two answers to their lists
-                    equations_list.append(f"y = {format_int(gradient)}x + {y_intercept}")
-                    y_intercept_list.append(f"y = {y_intercept}")
-
-                # prints error message if it is not able to be divided
-                except ZeroDivisionError:
-
                     # lets the user know that the coordinates they just entered are a vertical/horizontal line
                     if first_y == second_y:
-
                         # makes sure to convert to int if possible
                         horizontal_line = format_int(first_y)
 
@@ -251,17 +239,27 @@ while question_num <= questions_needed and response != "xxx":
                         # sets y intercept the point where line touches y int
                         y_intercept_list.append(f"y = {horizontal_line}")
 
-                    elif first_x == second_x:
+                    else:
+                        # calculates and rounds the y int
+                        y_intercept = first_y - gradient * first_x
+                        y_intercept = format_int(y_intercept)
 
-                        # makes sure to convert to int if possible
-                        vertical_line = format_int(first_x)
+                        # appends the two answers to their lists
+                        y_intercept_list.append(f"y = {y_intercept}")
+                        equations_list.append(f"y = {format_int(gradient)}x + {y_intercept}")
 
-                        print(f"\nThis is a vertical line with the equation: x = {vertical_line}")
-                        equations_list.append(f"x = {vertical_line}")
+                # prints error message if it is not able to be divided
+                except ZeroDivisionError:
 
-                        # sets y intercept to indefinite as there is no y intercept
-                        y_intercept = "Indefinite"
-                        y_intercept_list.append(y_intercept)
+                    # makes sure to convert to int if possible
+                    vertical_line = format_int(first_x)
+
+                    print(f"\nThis is a vertical line with the equation: x = {vertical_line}")
+                    equations_list.append(f"x = {vertical_line}")
+
+                    # sets y intercept to indefinite as there is no y intercept
+                    y_intercept = "Indefinite"
+                    y_intercept_list.append(y_intercept)
 
                 # calculates the midpoint and distance for each point
                 x_middle, y_middle = calc_midpoint(first_x, first_y, second_x, second_y)
