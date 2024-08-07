@@ -184,7 +184,7 @@ question_num = 1
 
 # makes sure the user enters a number above 0
 while True:
-    questions_needed = num_check("How many questions do you need answered? ")
+    questions_needed = num_check("\nHow many questions do you need answered? ")
 
     # sends the users back to the start of the loop if their number is <= 0
     if questions_needed <= 0:
@@ -245,9 +245,9 @@ while question_num <= questions_needed and response != "xxx":
                         # makes sure to convert to int if possible
                         horizontal_line = format_int(first_y)
 
-                        print(f"\nThis is a horizontal line with the equation: y = {horizontal_line}")
+                        print(f"\nThis is a horizontal line")
 
-                        equation = f"{horizontal_line}"
+                        equation = f"y = {horizontal_line}"
 
                         equations_list.append(f"y = {horizontal_line}")
 
@@ -257,7 +257,9 @@ while question_num <= questions_needed and response != "xxx":
                     else:
                         # calculates and rounds the y int
                         y_intercept = first_y - gradient * first_x
+
                         y_intercept = format_int(y_intercept)
+                        gradient = format_int(gradient)
 
                         # appends the two answers to their lists
                         y_intercept_list.append(f"y = {y_intercept}")
@@ -272,7 +274,7 @@ while question_num <= questions_needed and response != "xxx":
                     # makes sure to convert to int if possible
                     vertical_line = format_int(first_x)
 
-                    print(f"\nThis is a vertical line with the equation: x = {vertical_line}")
+                    print(f"\nThis is a vertical line")
 
                     equation = f"x = {vertical_line}"
 
