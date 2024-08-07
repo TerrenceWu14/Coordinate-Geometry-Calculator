@@ -295,9 +295,9 @@ while question_num <= questions_needed and response != "xxx":
                 midpoint = f"Midpoint: ({x_middle}, {y_middle})"
 
                 # appends and calculates (for some) the answers for the current coordinates
-                midpoints_list.append(midpoint)
-                distances_list.append(distance)
-                gradients_list.append(gradient)
+                midpoints_list.append(f"{midpoint}")
+                distances_list.append(f"{distance}")
+                gradients_list.append(f"{gradient}")
 
                 # appends the coordinates for this question
                 questions_list.append(f"Question {question_num}:")
@@ -321,7 +321,7 @@ while question_num <= questions_needed and response != "xxx":
                 coordinate = "second"
 
         else:
-            print("\nOnly enter floats or enter your numbers in the format (3,4) or 3,4")
+            print("Only enter floats or enter your numbers in the format (3,4) or 3,4\n")
 
 # sets up dict for pandas table
 answers = {
