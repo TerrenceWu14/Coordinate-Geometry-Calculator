@@ -247,6 +247,8 @@ while question_num <= questions_needed and response != "xxx":
 
                         print(f"\nThis is a horizontal line with the equation: y = {horizontal_line}")
 
+                        equation = f"{horizontal_line}"
+
                         equations_list.append(f"y = {horizontal_line}")
 
                         # sets y intercept the point where line touches y int
@@ -259,7 +261,10 @@ while question_num <= questions_needed and response != "xxx":
 
                         # appends the two answers to their lists
                         y_intercept_list.append(f"y = {y_intercept}")
-                        equations_list.append(format_equation(gradient, y_intercept))
+
+                        equation = f"{format_equation(gradient, y_intercept)}"
+
+                        equations_list.append(equation)
 
                 # prints error message if it is not able to be divided
                 except ZeroDivisionError:
@@ -268,7 +273,10 @@ while question_num <= questions_needed and response != "xxx":
                     vertical_line = format_int(first_x)
 
                     print(f"\nThis is a vertical line with the equation: x = {vertical_line}")
-                    equations_list.append(f"x = {vertical_line}")
+
+                    equation = f"x = {vertical_line}"
+
+                    equations_list.append(equation)
 
                     # sets y intercept to indefinite as there is no y intercept
                     y_intercept = "Indefinite"
@@ -282,8 +290,10 @@ while question_num <= questions_needed and response != "xxx":
                 # and sets the values to their respective variables
                 gradient, x_middle, y_middle, distance = map(format_int, (gradient, x_middle, y_middle, distance))
 
+                midpoint = f"Midpoint: ({x_middle}, {y_middle})"
+
                 # appends and calculates (for some) the answers for the current coordinates
-                midpoints_list.append(f"Midpoint: ({x_middle}, {y_middle})")
+                midpoints_list.append(midpoint)
                 distances_list.append(distance)
                 gradients_list.append(gradient)
 
@@ -292,6 +302,10 @@ while question_num <= questions_needed and response != "xxx":
 
                 # updates the question counter
                 question_num += 1
+
+                print(
+                    f"\nEquation: {equation}\nMidpoint: {midpoint}\nDistance: {distance}\n"
+                    f"Gradient: {gradient}\nY Intercept: {y_intercept}")
 
                 break
 
