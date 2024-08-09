@@ -50,9 +50,13 @@ That's about it, thanks for using my coordinate geometry calculator!
 
 Note: Large numbers may affect how the table of answers is displayed
 but you will still see the full table if you 
-look at the txt file.
+look at the txt file. If there is a huge difference between two coordinates
+then it can also force a rounding error making the gradient 0 when in 
+reality it would be something super small such as 0.000000000000000000000000002. 
 
-*****************************************************************
+Example of something too big: (99999999, 0) and (1, 1)
+                            
+**********************************************************************************
     ''')
 
 
