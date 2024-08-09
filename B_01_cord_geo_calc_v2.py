@@ -36,8 +36,8 @@ def instructions():
 
 To begin, enter the file name you want or leave it blank
 for us to generate one for you. After that enter the amount of
-questions you wanted you enter your first x and y coordinates then 
-the second one. If you feel like you asked for more questions
+questions you want. Then you enter your first x and y coordinates 
+followed by the second one. If you feel like you asked for more questions
 than needed feel free to type "xxx" to exit.
 
 The list of answers that we can calculate for you are: 
